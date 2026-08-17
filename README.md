@@ -8,17 +8,16 @@ Site statique en HTML / CSS / JavaScript pur — aucun framework, aucune dépend
 
 ### Sections
 
-- **Accueil** — hero photo plein écran avec parallaxe, badge circulaire rotatif, barre de statistiques
+- **Accueil** — hero photo plein écran avec parallaxe, badge circulaire rotatif, barre d'engagements
 - **Bandeau défilant** — marquee des prestations
 - **Services** — deux cartes photo : detailing auto & nettoyage extérieur
 - **À propos** — présentation du fondateur avec portrait, valeurs et signature
 - **Méthode** — le parcours client en 4 étapes
-- **Tarifs** — grilles à onglets (auto / extérieurs) avec 3 formules chacune
 - **Réalisations** — comparateurs avant / après interactifs (curseur)
 - **Galerie** — 7 photos avec légendes au survol
 - **Avis clients** — témoignages
 - **FAQ** — questions fréquentes (accordéon)
-- **Contact** — coordonnées + formulaire de demande de devis
+- **Contact** — email, réseaux sociaux + formulaire de contact (les prix ne sont communiqués que sur demande)
 - Design responsive, animations au scroll (apparitions latérales avec rotation, badge qui tourne, filigrane parallaxe), barre de progression de lecture, menu mobile
 
 ## Lancer le site en local
@@ -43,10 +42,8 @@ Tout le contenu à adapter est dans `index.html` :
 
 | Élément | Où le modifier |
 |---|---|
-| Téléphone `06 00 00 00 00` | Rechercher `+33600000000` et `06 00 00 00 00` |
 | Email `contact@blvwash.fr` | Rechercher `contact@blvwash.fr` (aussi dans `js/main.js`) |
 | Zone d'intervention | Section Contact (`#contact`) |
-| Tarifs et formules | Section Tarifs (`#tarifs`) |
 | Avis clients | Section Avis (`#avis`) |
 | Réseaux sociaux | Footer (liens `#` à remplacer par vos URLs) |
 | Couleurs / thème | Variables CSS en tête de `css/style.css` (`:root`) |

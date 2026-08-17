@@ -107,54 +107,6 @@
     .querySelectorAll(".reveal, .reveal-left, .reveal-right")
     .forEach((el) => revealObserver.observe(el));
 
-  /* ----- Compteurs animés ----- */
-  const animateCount = (el) => {
-    const target = parseInt(el.dataset.count, 10);
-    const duration = 1600;
-    const start = performance.now();
-    const tick = (now) => {
-      const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased);
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
-
-  const countObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCount(entry.target);
-          countObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.6 }
-  );
-  document.querySelectorAll("[data-count]").forEach((el) => countObserver.observe(el));
-
-  /* ----- Onglets tarifs ----- */
-  const tabAuto = document.getElementById("tab-auto");
-  const tabExt = document.getElementById("tab-ext");
-  const panelAuto = document.getElementById("panel-auto");
-  const panelExt = document.getElementById("panel-ext");
-
-  const switchTab = (activeTab, activePanel, otherTab, otherPanel) => {
-    activeTab.classList.add("is-active");
-    otherTab.classList.remove("is-active");
-    activeTab.setAttribute("aria-selected", "true");
-    otherTab.setAttribute("aria-selected", "false");
-    activePanel.classList.remove("is-hidden");
-    activePanel.hidden = false;
-    otherPanel.classList.add("is-hidden");
-    otherPanel.hidden = true;
-    activePanel.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
-  };
-
-  tabAuto.addEventListener("click", () => switchTab(tabAuto, panelAuto, tabExt, panelExt));
-  tabExt.addEventListener("click", () => switchTab(tabExt, panelExt, tabAuto, panelAuto));
-
   /* ----- Curseurs avant / après ----- */
   document.querySelectorAll("[data-ba]").forEach((figure) => {
     const frame = figure.querySelector(".ba__frame");
@@ -180,7 +132,7 @@
 
     const data = new FormData(form);
     const lignes = [
-      "Nouvelle demande de devis — BLV WASH",
+      "Nouvelle demande de contact — BLV WASH",
       "",
       "Nom : " + data.get("name"),
       "Téléphone : " + data.get("phone"),
@@ -196,7 +148,7 @@
     // Formspree, Web3Forms ou votre propre backend.
     const mailto =
       "mailto:contact@blvwash.fr" +
-      "?subject=" + encodeURIComponent("Demande de devis — " + data.get("service")) +
+      "?subject=" + encodeURIComponent("Demande de prix — " + data.get("service")) +
       "&body=" + encodeURIComponent(lignes.join("\n"));
 
     window.location.href = mailto;
@@ -205,7 +157,4 @@
     status.className = "form__status is-ok";
     form.reset();
   });
-
-  /* ----- Année du footer ----- */
-  document.getElementById("year").textContent = new Date().getFullYear();
 })();
