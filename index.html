@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLV WASH — Lavage auto &amp; nettoyage extérieur professionnel</title>
+  <meta name="description" content="BLV WASH : lavage automobile intérieur et extérieur, nettoyage de terrasses, façades et toitures. Un service professionnel, soigné et à domicile. Devis gratuit.">
+  <meta property="og:title" content="BLV WASH — Lavage auto &amp; nettoyage extérieur professionnel">
+  <meta property="og:description" content="Lavage automobile premium et nettoyage haute pression de terrasses, façades et toitures. Devis gratuit.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230b1f33'/%3E%3Cpath d='M50 18C38 34 28 46 28 58a22 22 0 0 0 44 0c0-12-10-24-22-40z' fill='%2338bdf8'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#accueil" class="logo" aria-label="BLV WASH — retour à l'accueil">
+        <span class="logo__icon" aria-hidden="true">
+          <svg viewBox="0 0 100 100" width="34" height="34"><circle cx="50" cy="50" r="48" fill="var(--navy-800)"/><path d="M50 18C38 34 28 46 28 58a22 22 0 0 0 44 0c0-12-10-24-22-40z" fill="var(--accent)"/></svg>
+        </span>
+        <span class="logo__text">BLV <em>WASH</em></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <a href="#accueil" class="nav__link is-active">Accueil</a>
+        <a href="#services" class="nav__link">Services</a>
+        <a href="#tarifs" class="nav__link">Tarifs</a>
+        <a href="#realisations" class="nav__link">Réalisations</a>
+        <a href="#avis" class="nav__link">Avis</a>
+        <a href="#faq" class="nav__link">FAQ</a>
+        <a href="#contact" class="btn btn--primary btn--sm nav__cta">Devis gratuit</a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="accueil">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__glow hero__glow--1"></div>
+        <div class="hero__glow hero__glow--2"></div>
+        <svg class="hero__wave" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,64 C240,110 480,20 720,50 C960,80 1200,110 1440,60 L1440,120 L0,120 Z" fill="var(--bg)"/></svg>
+      </div>
+
+      <div class="container hero__inner">
+        <div class="hero__content reveal">
+          <span class="badge">💧 Propreté professionnelle — véhicules &amp; extérieurs</span>
+          <h1>Votre voiture et vos extérieurs <span class="grad">comme neufs</span>.</h1>
+          <p class="hero__lead">
+            BLV WASH prend soin de votre véhicule et de votre habitat : lavage auto intérieur &amp; extérieur,
+            nettoyage haute pression de terrasses, façades, toitures et allées.
+            Un travail minutieux, des produits professionnels, un résultat impeccable.
+          </p>
+          <div class="hero__actions">
+            <a href="#contact" class="btn btn--primary">Demander un devis gratuit</a>
+            <a href="#services" class="btn btn--ghost">Découvrir nos services</a>
+          </div>
+          <ul class="hero__points">
+            <li>✔ Intervention à domicile</li>
+            <li>✔ Devis gratuit sous 24&nbsp;h</li>
+            <li>✔ Satisfaction garantie</li>
+          </ul>
+        </div>
+
+        <div class="hero__card reveal delay-1" aria-hidden="true">
+          <div class="carwash-illustration">
+            <svg viewBox="0 0 520 360" role="img" aria-label="Illustration lavage de voiture">
+              <defs>
+                <linearGradient id="carbody" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0ea5e9"/>
+                </linearGradient>
+                <linearGradient id="ground" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#12314e"/><stop offset="1" stop-color="#0b1f33"/>
+                </linearGradient>
+              </defs>
+              <ellipse cx="260" cy="300" rx="220" ry="26" fill="url(#ground)"/>
+              <g class="float">
+                <path d="M90 250 Q95 205 140 195 L170 160 Q180 145 200 143 L320 143 Q340 145 352 162 L378 195 Q430 202 436 245 Q438 262 425 264 L105 264 Q88 262 90 250 Z" fill="url(#carbody)"/>
+                <path d="M185 160 Q192 152 202 151 L245 151 L245 192 L172 192 Z" fill="#0b1f33" opacity=".85"/>
+                <path d="M258 151 L315 151 Q330 152 338 164 L358 192 L258 192 Z" fill="#0b1f33" opacity=".85"/>
+                <circle cx="160" cy="266" r="30" fill="#0b1f33"/><circle cx="160" cy="266" r="14" fill="#334155"/>
+                <circle cx="366" cy="266" r="30" fill="#0b1f33"/><circle cx="366" cy="266" r="14" fill="#334155"/>
+                <rect x="415" y="228" width="20" height="10" rx="5" fill="#fef08a"/>
+                <rect x="92" y="228" width="16" height="10" rx="5" fill="#fda4af"/>
+              </g>
+              <g class="bubbles">
+                <circle cx="120" cy="120" r="14" class="bubble b1"/>
+                <circle cx="410" cy="100" r="10" class="bubble b2"/>
+                <circle cx="360" cy="70" r="16" class="bubble b3"/>
+                <circle cx="180" cy="70" r="9" class="bubble b4"/>
+                <circle cx="460" cy="170" r="8" class="bubble b5"/>
+                <circle cx="70" cy="180" r="11" class="bubble b6"/>
+              </g>
+              <g class="shine">
+                <path d="M210 118 l8 18 18 8 -18 8 -8 18 -8 -18 -18 -8 18 -8 z" fill="#e0f2fe"/>
+                <path d="M320 100 l5 11 11 5 -11 5 -5 11 -5 -11 -11 -5 11 -5 z" fill="#e0f2fe" opacity=".8"/>
+              </g>
+            </svg>
+          </div>
+          <div class="hero__stats">
+            <div class="stat"><strong data-count="500">0</strong><span>véhicules lavés</span></div>
+            <div class="stat"><strong data-count="150">0</strong><span>terrasses rénovées</span></div>
+            <div class="stat"><strong data-count="100">0</strong><span>% clients satisfaits</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Bandeau confiance ===== -->
+    <section class="trustbar">
+      <div class="container trustbar__inner">
+        <div class="trust reveal"><span class="trust__icon">🚗</span><div><strong>À domicile ou sur site</strong><span>Nous venons à vous, 7j/7 sur rendez-vous</span></div></div>
+        <div class="trust reveal delay-1"><span class="trust__icon">🧴</span><div><strong>Produits professionnels</strong><span>Efficaces et respectueux des surfaces</span></div></div>
+        <div class="trust reveal delay-2"><span class="trust__icon">🛡️</span><div><strong>Assuré &amp; garanti</strong><span>Interventions couvertes, résultat garanti</span></div></div>
+        <div class="trust reveal delay-3"><span class="trust__icon">⚡</span><div><strong>Devis sous 24 h</strong><span>Réponse rapide, tarifs transparents</span></div></div>
+      </div>
+    </section>
+
+    <!-- ===== Services ===== -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Nos services</span>
+          <h2>Deux expertises, <span class="grad">un même niveau d'exigence</span></h2>
+          <p>Du lavage automobile minutieux au nettoyage haute pression de vos extérieurs, chaque intervention est réalisée avec le plus grand soin.</p>
+        </div>
+
+        <div class="services__grid">
+          <!-- Auto -->
+          <article class="service-card reveal">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l1.5-4.5A2 2 0 0 1 8.4 6h7.2a2 2 0 0 1 1.9 1.5L19 12"/><path d="M4 12h16a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1"/><path d="M3 13v3a1 1 0 0 0 1 1h1"/><circle cx="7.5" cy="17" r="1.8"/><circle cx="16.5" cy="17" r="1.8"/></svg>
+            </div>
+            <h3>Lavage automobile</h3>
+            <p>Un lavage main soigné, intérieur comme extérieur, pour retrouver une voiture éclatante — sans micro-rayures ni traces.</p>
+            <ul class="service-card__list">
+              <li>Lavage extérieur main &amp; séchage microfibre</li>
+              <li>Nettoyage intérieur complet (aspiration, plastiques, vitres)</li>
+              <li>Shampouinage sièges &amp; moquettes</li>
+              <li>Décontamination &amp; protection céramique</li>
+              <li>Rénovation optiques de phares</li>
+              <li>Désodorisation &amp; traitement anti-bactérien</li>
+            </ul>
+            <a href="#tarifs" class="service-card__link">Voir les formules auto →</a>
+          </article>
+
+          <!-- Extérieur -->
+          <article class="service-card reveal delay-1">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/><path d="M9 11h.01M15 11h.01"/></svg>
+            </div>
+            <h3>Nettoyage extérieur</h3>
+            <p>Terrasses, façades, toitures, allées : nous redonnons vie à vos surfaces extérieures grâce au nettoyage haute et basse pression.</p>
+            <ul class="service-card__list">
+              <li>Terrasses bois, carrelage, pierre &amp; béton</li>
+              <li>Façades &amp; murs (démoussage, dégriffage)</li>
+              <li>Toitures : démoussage &amp; traitement hydrofuge</li>
+              <li>Allées, cours &amp; pavés autobloquants</li>
+              <li>Murets, clôtures &amp; mobilier de jardin</li>
+              <li>Vitres &amp; vérandas</li>
+            </ul>
+            <a href="#tarifs" class="service-card__link">Voir les prestations extérieures →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Méthode ===== -->
+    <section class="section section--alt" id="methode">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Notre méthode</span>
+          <h2>Simple, rapide, <span class="grad">sans surprise</span></h2>
+        </div>
+        <ol class="steps">
+          <li class="step reveal"><span class="step__num">1</span><h3>Vous nous contactez</h3><p>Par téléphone, formulaire ou WhatsApp. Décrivez votre besoin, envoyez une photo si vous le souhaitez.</p></li>
+          <li class="step reveal delay-1"><span class="step__num">2</span><h3>Devis gratuit sous 24 h</h3><p>Nous vous proposons un tarif clair et détaillé, sans frais cachés ni engagement.</p></li>
+          <li class="step reveal delay-2"><span class="step__num">3</span><h3>Intervention soignée</h3><p>Nous intervenons au créneau convenu, avec notre matériel professionnel et nos produits adaptés.</p></li>
+          <li class="step reveal delay-3"><span class="step__num">4</span><h3>Résultat garanti</h3><p>Vous validez le résultat ensemble avec nous. Pas satisfait ? Nous revenons, c'est notre engagement.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Tarifs ===== -->
+    <section class="section" id="tarifs">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Tarifs</span>
+          <h2>Des formules <span class="grad">claires et transparentes</span></h2>
+          <p>Tarifs indicatifs — chaque devis est ajusté selon la taille du véhicule ou la surface à traiter.</p>
+        </div>
+
+        <div class="pricing__toggle reveal" role="tablist" aria-label="Choix de la grille tarifaire">
+          <button class="pricing__tab is-active" id="tab-auto" role="tab" aria-selected="true" aria-controls="panel-auto">🚗 Lavage auto</button>
+          <button class="pricing__tab" id="tab-ext" role="tab" aria-selected="false" aria-controls="panel-ext">🏡 Extérieurs</button>
+        </div>
+
+        <!-- Auto -->
+        <div class="pricing__grid" id="panel-auto" role="tabpanel" aria-labelledby="tab-auto">
+          <article class="price-card reveal">
+            <h3>Essentiel</h3>
+            <p class="price-card__desc">L'entretien régulier de votre véhicule</p>
+            <p class="price-card__price">dès <strong>39&nbsp;€</strong></p>
+            <ul>
+              <li>Lavage extérieur main</li>
+              <li>Jantes &amp; pneus</li>
+              <li>Séchage microfibre</li>
+              <li>Vitres extérieures</li>
+              <li>Aspiration rapide habitacle</li>
+            </ul>
+            <a href="#contact" class="btn btn--ghost btn--block">Réserver</a>
+          </article>
+
+          <article class="price-card price-card--featured reveal delay-1">
+            <span class="price-card__badge">Le plus demandé</span>
+            <h3>Complet</h3>
+            <p class="price-card__desc">Intérieur + extérieur, la remise à neuf</p>
+            <p class="price-card__price">dès <strong>89&nbsp;€</strong></p>
+            <ul>
+              <li>Toute la formule Essentiel</li>
+              <li>Intérieur complet (plastiques, seuils, vitres)</li>
+              <li>Aspiration en profondeur</li>
+              <li>Dépoussiérage &amp; finitions</li>
+              <li>Désodorisation habitacle</li>
+              <li>Cire de protection carrosserie</li>
+            </ul>
+            <a href="#contact" class="btn btn--primary btn--block">Réserver</a>
+          </article>
+
+          <article class="price-card reveal delay-2">
+            <h3>Prestige</h3>
+            <p class="price-card__desc">Le detailing pour un rendu showroom</p>
+            <p class="price-card__price">dès <strong>169&nbsp;€</strong></p>
+            <ul>
+              <li>Toute la formule Complet</li>
+              <li>Shampouinage sièges &amp; moquettes</li>
+              <li>Décontamination carrosserie</li>
+              <li>Protection céramique ou cire premium</li>
+              <li>Rénovation plastiques &amp; cuirs</li>
+              <li>Traitement anti-pluie pare-brise</li>
+            </ul>
+            <a href="#contact" class="btn btn--ghost btn--block">Réserver</a>
+          </article>
+        </div>
+
+        <!-- Extérieur -->
+        <div class="pricing__grid is-hidden" id="panel-ext" role="tabpanel" aria-labelledby="tab-ext" hidden>
+          <article class="price-card reveal">
+            <h3>Terrasse</h3>
+            <p class="price-card__desc">Bois, carrelage, pierre ou béton</p>
+            <p class="price-card__price">dès <strong>8&nbsp;€/m²</strong></p>
+            <ul>
+              <li>Nettoyage haute pression adapté</li>
+              <li>Dégraissage &amp; démoussage</li>
+              <li>Rinçage complet</li>
+              <li>Option traitement anti-mousse</li>
+              <li>Option saturateur / hydrofuge</li>
+            </ul>
+            <a href="#contact" class="btn btn--ghost btn--block">Demander un devis</a>
+          </article>
+
+          <article class="price-card price-card--featured reveal delay-1">
+            <span class="price-card__badge">Pack populaire</span>
+            <h3>Terrasse + Allées</h3>
+            <p class="price-card__desc">Le pack extérieur complet</p>
+            <p class="price-card__price">sur <strong>devis</strong></p>
+            <ul>
+              <li>Terrasse complète</li>
+              <li>Allées, cours &amp; pavés</li>
+              <li>Murets &amp; bordures</li>
+              <li>Traitement anti-mousse longue durée</li>
+              <li>Tarif dégressif selon surface</li>
+            </ul>
+            <a href="#contact" class="btn btn--primary btn--block">Demander un devis</a>
+          </article>
+
+          <article class="price-card reveal delay-2">
+            <h3>Façade &amp; Toiture</h3>
+            <p class="price-card__desc">Redonnez de l'éclat à votre maison</p>
+            <p class="price-card__price">sur <strong>devis</strong></p>
+            <ul>
+              <li>Démoussage toiture</li>
+              <li>Nettoyage façade basse pression</li>
+              <li>Traitement hydrofuge</li>
+              <li>Nettoyage gouttières</li>
+              <li>Inspection &amp; conseils inclus</li>
+            </ul>
+            <a href="#contact" class="btn btn--ghost btn--block">Demander un devis</a>
+          </article>
+        </div>
+
+        <p class="pricing__note reveal">💡 Déplacement offert dans un rayon de 20&nbsp;km. Tarifs entreprises &amp; flottes sur demande.</p>
+      </div>
+    </section>
+
+    <!-- ===== Réalisations (avant/après) ===== -->
+    <section class="section section--alt" id="realisations">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Réalisations</span>
+          <h2>Avant / Après : <span class="grad">la différence BLV WASH</span></h2>
+          <p>Faites glisser le curseur pour découvrir le résultat de nos interventions.</p>
+        </div>
+
+        <div class="ba__grid">
+          <figure class="ba reveal" data-ba>
+            <div class="ba__frame">
+              <div class="ba__side ba__side--before"><span class="ba__label">Avant</span><svg viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="260" fill="#4a4438"/><g fill="#6b6350"><rect x="0" y="0" width="95" height="60"/><rect x="105" y="0" width="95" height="60"/><rect x="210" y="0" width="95" height="60"/><rect x="315" y="0" width="85" height="60"/><rect x="0" y="70" width="95" height="60"/><rect x="105" y="70" width="95" height="60"/><rect x="210" y="70" width="95" height="60"/><rect x="315" y="70" width="85" height="60"/><rect x="0" y="140" width="95" height="60"/><rect x="105" y="140" width="95" height="60"/><rect x="210" y="140" width="95" height="60"/><rect x="315" y="140" width="85" height="60"/><rect x="0" y="210" width="95" height="50"/><rect x="105" y="210" width="95" height="50"/><rect x="210" y="210" width="95" height="50"/><rect x="315" y="210" width="85" height="50"/></g><g fill="#3f5233" opacity=".65"><ellipse cx="60" cy="40" rx="50" ry="26"/><ellipse cx="330" cy="100" rx="60" ry="30"/><ellipse cx="150" cy="200" rx="70" ry="34"/><ellipse cx="260" cy="60" rx="34" ry="18"/></g></svg></div>
+              <div class="ba__side ba__side--after"><span class="ba__label ba__label--after">Après</span><svg viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="260" fill="#b9a488"/><g fill="#d6c3a5"><rect x="0" y="0" width="95" height="60"/><rect x="105" y="0" width="95" height="60"/><rect x="210" y="0" width="95" height="60"/><rect x="315" y="0" width="85" height="60"/><rect x="0" y="70" width="95" height="60"/><rect x="105" y="70" width="95" height="60"/><rect x="210" y="70" width="95" height="60"/><rect x="315" y="70" width="85" height="60"/><rect x="0" y="140" width="95" height="60"/><rect x="105" y="140" width="95" height="60"/><rect x="210" y="140" width="95" height="60"/><rect x="315" y="140" width="85" height="60"/><rect x="0" y="210" width="95" height="50"/><rect x="105" y="210" width="95" height="50"/><rect x="210" y="210" width="95" height="50"/><rect x="315" y="210" width="85" height="50"/></g></svg></div>
+              <div class="ba__handle" aria-hidden="true"><span></span></div>
+              <input type="range" class="ba__range" min="0" max="100" value="50" aria-label="Comparer avant et après — terrasse">
+            </div>
+            <figcaption>Terrasse carrelée — nettoyage haute pression + anti-mousse</figcaption>
+          </figure>
+
+          <figure class="ba reveal delay-1" data-ba>
+            <div class="ba__frame">
+              <div class="ba__side ba__side--before"><span class="ba__label">Avant</span><svg viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="260" fill="#57534e"/><path d="M60 190 Q65 150 105 142 L130 112 Q140 98 158 96 L262 96 Q280 98 291 113 L314 142 Q356 148 361 184 Q363 200 350 202 L73 202 Q58 200 60 190 Z" fill="#6b7280"/><circle cx="125" cy="203" r="24" fill="#292524"/><circle cx="300" cy="203" r="24" fill="#292524"/><g fill="#78716c" opacity=".8"><ellipse cx="180" cy="130" rx="30" ry="12"/><ellipse cx="250" cy="160" rx="40" ry="14"/><ellipse cx="120" cy="165" rx="26" ry="10"/></g></svg></div>
+              <div class="ba__side ba__side--after"><span class="ba__label ba__label--after">Après</span><svg viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="260" fill="#0f2a43"/><path d="M60 190 Q65 150 105 142 L130 112 Q140 98 158 96 L262 96 Q280 98 291 113 L314 142 Q356 148 361 184 Q363 200 350 202 L73 202 Q58 200 60 190 Z" fill="#38bdf8"/><path d="M150 112 Q156 105 165 104 L200 104 L200 138 L128 138 Z" fill="#0b1f33"/><path d="M212 104 L258 104 Q270 105 277 115 L293 138 L212 138 Z" fill="#0b1f33"/><circle cx="125" cy="203" r="24" fill="#0b1f33"/><circle cx="125" cy="203" r="10" fill="#475569"/><circle cx="300" cy="203" r="24" fill="#0b1f33"/><circle cx="300" cy="203" r="10" fill="#475569"/><path d="M180 70 l6 13 13 6 -13 6 -6 13 -6 -13 -13 -6 13 -6 z" fill="#e0f2fe"/></svg></div>
+              <div class="ba__handle" aria-hidden="true"><span></span></div>
+              <input type="range" class="ba__range" min="0" max="100" value="50" aria-label="Comparer avant et après — véhicule">
+            </div>
+            <figcaption>Berline — formule Prestige avec protection céramique</figcaption>
+          </figure>
+        </div>
+
+        <p class="ba__note reveal">📸 Retrouvez toutes nos réalisations en photo sur nos réseaux sociaux — remplacez ces illustrations par vos propres photos avant/après.</p>
+      </div>
+    </section>
+
+    <!-- ===== Avis ===== -->
+    <section class="section" id="avis">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Ils nous font confiance</span>
+          <h2>Ce que disent <span class="grad">nos clients</span></h2>
+        </div>
+        <div class="reviews">
+          <blockquote class="review reveal">
+            <div class="review__stars" aria-label="5 étoiles sur 5">★★★★★</div>
+            <p>« Ma terrasse était noircie par des années de mousse. Après le passage de BLV WASH, on dirait qu'elle vient d'être posée. Travail très propre, équipe ponctuelle. »</p>
+            <footer><span class="review__avatar">S</span><div><strong>Sophie M.</strong><span>Nettoyage terrasse — 45 m²</span></div></footer>
+          </blockquote>
+          <blockquote class="review reveal delay-1">
+            <div class="review__stars" aria-label="5 étoiles sur 5">★★★★★</div>
+            <p>« Formule Prestige sur ma voiture : intérieur comme neuf, carrosserie brillante, aucune trace. Le niveau de détail est impressionnant. Je recommande à 100 %. »</p>
+            <footer><span class="review__avatar">K</span><div><strong>Karim B.</strong><span>Lavage auto — formule Prestige</span></div></footer>
+          </blockquote>
+          <blockquote class="review reveal delay-2">
+            <div class="review__stars" aria-label="5 étoiles sur 5">★★★★★</div>
+            <p>« Devis rapide, prix honnête, résultat top sur la façade et les allées. En plus ils se déplacent, c'est vraiment pratique. On refera appel à eux chaque année. »</p>
+            <footer><span class="review__avatar">L</span><div><strong>Laurent D.</strong><span>Façade + allées</span></div></footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section section--alt" id="faq">
+      <div class="container container--narrow">
+        <div class="section__head reveal">
+          <span class="eyebrow">FAQ</span>
+          <h2>Questions <span class="grad">fréquentes</span></h2>
+        </div>
+        <div class="faq reveal">
+          <details class="faq__item" open>
+            <summary>Vous déplacez-vous à domicile ?</summary>
+            <p>Oui, c'est même notre spécialité : nous intervenons directement chez vous ou sur votre lieu de travail, avec tout notre matériel. Le déplacement est offert dans un rayon de 20 km.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Faut-il prévoir un accès à l'eau ou à l'électricité ?</summary>
+            <p>Un simple accès à un robinet extérieur et à une prise électrique suffit dans la plupart des cas. Si ce n'est pas possible, prévenez-nous : nous disposons de solutions autonomes.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Vos produits abîment-ils les surfaces ou les plantes ?</summary>
+            <p>Non. Nous utilisons des produits professionnels adaptés à chaque surface (bois, pierre, carrosserie, cuir…) et nous protégeons les végétaux et zones sensibles avant chaque intervention.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Combien de temps dure une intervention ?</summary>
+            <p>Comptez 1 h à 1 h 30 pour un lavage Essentiel, 2 h 30 à 3 h pour une formule Complet, et une demi-journée à une journée pour une terrasse ou une façade selon la surface.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Comment se passe le paiement ?</summary>
+            <p>Le règlement s'effectue après l'intervention, une fois le résultat validé ensemble : espèces, virement ou carte bancaire. Une facture vous est remise systématiquement.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Proposez-vous des contrats d'entretien réguliers ?</summary>
+            <p>Oui : formules mensuelles ou trimestrielles pour les particuliers, et contrats sur mesure pour les entreprises, flottes de véhicules, commerces et copropriétés. Contactez-nous pour un devis personnalisé.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta">
+      <div class="container cta__inner reveal">
+        <h2>Prêt à retrouver l'éclat du neuf ?</h2>
+        <p>Devis gratuit et sans engagement — réponse sous 24 h.</p>
+        <div class="cta__actions">
+          <a href="#contact" class="btn btn--light">Demander mon devis</a>
+          <a href="tel:+33600000000" class="btn btn--outline-light">📞 06 00 00 00 00</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Contact</span>
+          <h2>Parlons de <span class="grad">votre projet</span></h2>
+          <p>Décrivez votre besoin, nous revenons vers vous sous 24 h avec un devis gratuit.</p>
+        </div>
+
+        <div class="contact">
+          <div class="contact__info reveal">
+            <div class="contact__item"><span class="contact__icon">📞</span><div><strong>Téléphone</strong><a href="tel:+33600000000">06 00 00 00 00</a><span class="contact__sub">7j/7 de 8 h à 20 h</span></div></div>
+            <div class="contact__item"><span class="contact__icon">✉️</span><div><strong>Email</strong><a href="mailto:contact@blvwash.fr">contact@blvwash.fr</a><span class="contact__sub">Réponse sous 24 h</span></div></div>
+            <div class="contact__item"><span class="contact__icon">📍</span><div><strong>Zone d'intervention</strong><span>Votre ville et ses alentours (30 km)</span><span class="contact__sub">Déplacement offert &lt; 20 km</span></div></div>
+            <div class="contact__item"><span class="contact__icon">💬</span><div><strong>WhatsApp</strong><a href="https://wa.me/33600000000" target="_blank" rel="noopener">Écrivez-nous directement</a><span class="contact__sub">Envoyez vos photos pour un devis express</span></div></div>
+          </div>
+
+          <form class="form reveal delay-1" id="contact-form" novalidate>
+            <div class="form__row">
+              <div class="form__group">
+                <label for="f-name">Nom complet *</label>
+                <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="Jean Dupont">
+              </div>
+              <div class="form__group">
+                <label for="f-phone">Téléphone *</label>
+                <input type="tel" id="f-phone" name="phone" required autocomplete="tel" placeholder="06 12 34 56 78">
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="form__group">
+                <label for="f-email">Email</label>
+                <input type="email" id="f-email" name="email" autocomplete="email" placeholder="jean@exemple.fr">
+              </div>
+              <div class="form__group">
+                <label for="f-service">Prestation souhaitée *</label>
+                <select id="f-service" name="service" required>
+                  <option value="" disabled selected>Choisir une prestation…</option>
+                  <optgroup label="Lavage auto">
+                    <option>Formule Essentiel</option>
+                    <option>Formule Complet</option>
+                    <option>Formule Prestige</option>
+                  </optgroup>
+                  <optgroup label="Extérieurs">
+                    <option>Terrasse</option>
+                    <option>Allées / cour</option>
+                    <option>Façade</option>
+                    <option>Toiture</option>
+                  </optgroup>
+                  <option>Autre / plusieurs prestations</option>
+                </select>
+              </div>
+            </div>
+            <div class="form__group">
+              <label for="f-msg">Votre message *</label>
+              <textarea id="f-msg" name="message" rows="5" required placeholder="Décrivez votre besoin : type de véhicule ou surface approximative, état actuel, disponibilités…"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--block">Envoyer ma demande de devis</button>
+            <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+            <p class="form__legal">En envoyant ce formulaire, vous acceptez d'être recontacté par BLV WASH au sujet de votre demande. Vos données ne sont jamais partagées.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="#accueil" class="logo logo--footer">
+          <span class="logo__icon" aria-hidden="true"><svg viewBox="0 0 100 100" width="30" height="30"><circle cx="50" cy="50" r="48" fill="#12314e"/><path d="M50 18C38 34 28 46 28 58a22 22 0 0 0 44 0c0-12-10-24-22-40z" fill="#38bdf8"/></svg></span>
+          <span class="logo__text">BLV <em>WASH</em></span>
+        </a>
+        <p>Lavage automobile et nettoyage extérieur professionnel. La propreté, notre métier ; votre satisfaction, notre priorité.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8h2.5V4.5H14A3.5 3.5 0 0 0 10.5 8v2.5H8V14h2.5v6H14v-6h2.5l.5-3.5h-3V8.5A.5.5 0 0 1 14 8z"/></svg></a>
+          <a href="#" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4v9.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 6.5c.8 1.6 2.3 2.8 4.5 3"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Services</h4>
+        <a href="#services">Lavage automobile</a>
+        <a href="#services">Nettoyage terrasse</a>
+        <a href="#services">Façades &amp; toitures</a>
+        <a href="#tarifs">Nos tarifs</a>
+      </div>
+      <div class="footer__col">
+        <h4>Entreprise</h4>
+        <a href="#methode">Notre méthode</a>
+        <a href="#realisations">Réalisations</a>
+        <a href="#avis">Avis clients</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <a href="tel:+33600000000">06 00 00 00 00</a>
+        <a href="mailto:contact@blvwash.fr">contact@blvwash.fr</a>
+        <a href="#contact">Demander un devis</a>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="year">2026</span> BLV WASH — Tous droits réservés.</p>
+      <p><a href="#">Mentions légales</a> · <a href="#">Politique de confidentialité</a></p>
+    </div>
+  </footer>
+
+  <a href="#accueil" class="backtop" id="backtop" aria-label="Retour en haut">↑</a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
