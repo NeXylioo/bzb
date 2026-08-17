@@ -1,16 +1,57 @@
 /* ==========================================================================
-   BLV WASH — Scripts principaux
+   BLV WASH — Scripts principaux (édition premium)
    ========================================================================== */
 (function () {
   "use strict";
 
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   /* ----- Header : fond au scroll ----- */
   const header = document.getElementById("header");
-  const onScrollHeader = () => {
-    header.classList.toggle("is-scrolled", window.scrollY > 10);
+
+  /* ----- Barre de progression de lecture ----- */
+  const progressBar = document.getElementById("progress-bar");
+
+  /* ----- Parallaxe photo du hero ----- */
+  const heroImg = document.getElementById("hero-img");
+
+  /* ----- Badge circulaire : rotation pilotée par le scroll ----- */
+  const scrollOrbits = document.querySelectorAll(".orbit__ring--scroll");
+
+  /* ----- Filigrane qui glisse sur le côté ----- */
+  const watermark = document.querySelector("[data-parallax-x]");
+
+  /* ----- Bouton retour en haut ----- */
+  const backtop = document.getElementById("backtop");
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+
+      header.classList.toggle("is-scrolled", y > 10);
+      backtop.classList.toggle("is-visible", y > 600);
+
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
+
+      if (!reducedMotion) {
+        if (heroImg) heroImg.style.transform = "translateY(" + y * 0.25 + "px)";
+        scrollOrbits.forEach((el) => {
+          el.style.transform = "rotate(" + y * 0.12 + "deg)";
+        });
+        if (watermark) {
+          watermark.style.transform = "translateX(" + (140 - y * 0.18) + "px)";
+        }
+      }
+
+      ticking = false;
+    });
   };
-  window.addEventListener("scroll", onScrollHeader, { passive: true });
-  onScrollHeader();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
   /* ----- Menu mobile ----- */
   const burger = document.getElementById("burger");
@@ -50,7 +91,7 @@
   );
   sections.forEach((s) => spy.observe(s));
 
-  /* ----- Animations d'apparition ----- */
+  /* ----- Animations d'apparition (fondu, glissé, rotation latérale) ----- */
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -60,9 +101,11 @@
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.12 }
   );
-  document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+  document
+    .querySelectorAll(".reveal, .reveal-left, .reveal-right")
+    .forEach((el) => revealObserver.observe(el));
 
   /* ----- Compteurs animés ----- */
   const animateCount = (el) => {
@@ -162,14 +205,6 @@
     status.className = "form__status is-ok";
     form.reset();
   });
-
-  /* ----- Bouton retour en haut ----- */
-  const backtop = document.getElementById("backtop");
-  const onScrollTop = () => {
-    backtop.classList.toggle("is-visible", window.scrollY > 600);
-  };
-  window.addEventListener("scroll", onScrollTop, { passive: true });
-  onScrollTop();
 
   /* ----- Année du footer ----- */
   document.getElementById("year").textContent = new Date().getFullYear();
