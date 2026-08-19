@@ -237,17 +237,22 @@
           <span class="eyebrow eyebrow--gold">En images</span>
           <h2>Le soin du détail, <em class="accent-serif">en toutes circonstances</em></h2>
         </div>
-        <div class="hscroll" id="galerie-hscroll">
-          <div class="hscroll__sticky">
-            <div class="hscroll__track" id="galerie-track">
-              <figure class="gallery__item"><img src="assets/img/g1.jpg" alt="Lavage à la main d'une voiture de sport avec la méthode des deux seaux" loading="lazy"><figcaption>Lavage main deux seaux</figcaption></figure>
-              <figure class="gallery__item"><img src="assets/img/g2.jpg" alt="Séchage soigné d'un SUV noir en atelier" loading="lazy"><figcaption>Finitions en atelier</figcaption></figure>
-              <figure class="gallery__item"><img src="assets/img/g3.jpg" alt="Nettoyage d'un volant à la microfibre" loading="lazy"><figcaption>Detailing intérieur</figcaption></figure>
-              <figure class="gallery__item"><img src="assets/img/g6.jpg" alt="Voiture couverte de mousse active pendant le prélavage" loading="lazy"><figcaption>Prélavage mousse active</figcaption></figure>
-              <figure class="gallery__item"><img src="assets/img/g7.jpg" alt="Nettoyage haute pression d'une berline à domicile" loading="lazy"><figcaption>Haute pression à domicile</figcaption></figure>
-              <figure class="gallery__item"><img src="assets/img/g5.jpg" alt="Brossage d'une jante au pinceau de detailing" loading="lazy"><figcaption>Rénovation des jantes</figcaption></figure>
-              <figure class="gallery__item"><img src="assets/img/g4.jpg" alt="Nettoyage haute pression d'un escalier extérieur" loading="lazy"><figcaption>Haute pression extérieure</figcaption></figure>
+        <div class="carousel-3d" id="galerie-carousel">
+          <div class="carousel-3d__viewport" id="carousel-viewport">
+            <div class="carousel-3d__cylinder" id="carousel-cylinder">
+              <figure class="carousel-3d__face"><img src="assets/img/g1.jpg" alt="Lavage à la main d'une voiture de sport avec la méthode des deux seaux" loading="lazy"><figcaption>Lavage main deux seaux</figcaption></figure>
+              <figure class="carousel-3d__face"><img src="assets/img/g2.jpg" alt="Séchage soigné d'un SUV noir en atelier" loading="lazy"><figcaption>Finitions en atelier</figcaption></figure>
+              <figure class="carousel-3d__face"><img src="assets/img/g3.jpg" alt="Nettoyage d'un volant à la microfibre" loading="lazy"><figcaption>Detailing intérieur</figcaption></figure>
+              <figure class="carousel-3d__face"><img src="assets/img/g6.jpg" alt="Voiture couverte de mousse active pendant le prélavage" loading="lazy"><figcaption>Prélavage mousse active</figcaption></figure>
+              <figure class="carousel-3d__face"><img src="assets/img/g7.jpg" alt="Nettoyage haute pression d'une berline à domicile" loading="lazy"><figcaption>Haute pression à domicile</figcaption></figure>
+              <figure class="carousel-3d__face"><img src="assets/img/g5.jpg" alt="Brossage d'une jante au pinceau de detailing" loading="lazy"><figcaption>Rénovation des jantes</figcaption></figure>
+              <figure class="carousel-3d__face"><img src="assets/img/g4.jpg" alt="Nettoyage haute pression d'un escalier extérieur" loading="lazy"><figcaption>Haute pression extérieure</figcaption></figure>
             </div>
+          </div>
+          <!-- Overlay zoom au clic -->
+          <div class="carousel-3d__overlay" id="carousel-overlay" role="dialog" aria-modal="true" aria-label="Image agrandie">
+            <button class="carousel-3d__close" id="carousel-close" aria-label="Fermer">×</button>
+            <img class="carousel-3d__zoom-img" id="carousel-zoom-img" src="" alt="">
           </div>
         </div>
       </div>

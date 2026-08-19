@@ -15,10 +15,6 @@
   /* ----- Parallaxe photo du hero ----- */
   const heroImg = document.getElementById("hero-img");
 
-  /* ----- Galerie horizontale pilotée par la molette ----- */
-  const hscroll = document.getElementById("galerie-hscroll");
-  const hscrollTrack = document.getElementById("galerie-track");
-
   /* ----- Filigrane qui glisse sur le côté ----- */
   const watermark = document.querySelector("[data-parallax-x]");
 
@@ -40,12 +36,6 @@
 
       if (!reducedMotion) {
         if (heroImg) heroImg.style.transform = "translateY(" + y * 0.25 + "px)";
-        if (hscroll && hscrollTrack && window.innerWidth > 768) {
-          const total = hscroll.offsetHeight - window.innerHeight;
-          const progress = Math.min(Math.max((y - hscroll.offsetTop) / total, 0), 1);
-          const shift = Math.max(hscrollTrack.scrollWidth - window.innerWidth, 0);
-          hscrollTrack.style.transform = "translateX(" + -progress * shift + "px)";
-        }
         if (watermark) {
           watermark.style.transform = "translateX(" + (140 - y * 0.18) + "px)";
         }
@@ -152,6 +142,87 @@
     };
     requestAnimationFrame(beamFrame);
   }
+
+  /* ----- Galerie — carousel 3D cylindrique ----- */
+  (function () {
+    const viewport = document.getElementById("carousel-viewport");
+    const cylinder = document.getElementById("carousel-cylinder");
+    const overlay  = document.getElementById("carousel-overlay");
+    const closeBtn = document.getElementById("carousel-close");
+    const zoomImg  = document.getElementById("carousel-zoom-img");
+    if (!viewport || !cylinder) return;
+
+    const faces = Array.from(cylinder.querySelectorAll(".carousel-3d__face"));
+    const faceCount = faces.length;
+
+    const setup = () => {
+      const isMobile = window.innerWidth <= 640;
+      const cylW  = isMobile ? 1100 : 1800;
+      const faceW = cylW / faceCount;
+      const rad   = cylW / (2 * Math.PI);
+      cylinder.style.width = cylW + "px";
+      faces.forEach((face, i) => {
+        face.style.width = faceW + "px";
+        face.style.transform =
+          "rotateY(" + (i * 360 / faceCount) + "deg) translateZ(" + rad + "px)";
+      });
+    };
+    setup();
+    window.addEventListener("resize", setup);
+
+    let rot = 0, vel = 0, dragging = false;
+    let pxStart = 0, pxLast = 0, active = true, rafId = null;
+
+    const applyRot = () => { cylinder.style.transform = "rotateY(" + rot + "deg)"; };
+
+    const stopRaf = () => { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } };
+    const startMomentum = () => {
+      stopRaf();
+      const tick = () => {
+        if (dragging) return;
+        vel *= 0.955;
+        rot += vel;
+        applyRot();
+        rafId = Math.abs(vel) > 0.01 ? requestAnimationFrame(tick) : null;
+      };
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const pDown = (x) => { if (!active) return; dragging = true; pxStart = pxLast = x; vel = 0; stopRaf(); };
+    const pMove = (x) => {
+      if (!dragging || !active) return;
+      const dx = x - pxLast;
+      vel = dx * 0.05;
+      rot += vel;
+      applyRot();
+      pxLast = x;
+    };
+    const pUp = () => { if (!dragging) return; dragging = false; startMomentum(); };
+
+    viewport.addEventListener("mousedown",  (e) => pDown(e.clientX));
+    window.addEventListener ("mousemove",   (e) => pMove(e.clientX));
+    window.addEventListener ("mouseup",     pUp);
+    viewport.addEventListener("touchstart", (e) => pDown(e.touches[0].clientX), { passive: true });
+    viewport.addEventListener("touchmove",  (e) => pMove(e.touches[0].clientX), { passive: true });
+    viewport.addEventListener("touchend",   pUp);
+
+    faces.forEach((face) => {
+      face.addEventListener("click", () => {
+        if (Math.abs(pxStart - pxLast) > 6) return;
+        const img = face.querySelector("img");
+        if (!img) return;
+        zoomImg.src = img.src;
+        zoomImg.alt = img.alt || "";
+        overlay.classList.add("is-open");
+        active = false; stopRaf();
+      });
+    });
+
+    const closeOverlay = () => { overlay.classList.remove("is-open"); active = true; };
+    overlay.addEventListener("click", closeOverlay);
+    closeBtn.addEventListener("click", (e) => { e.stopPropagation(); closeOverlay(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeOverlay(); });
+  })();
 
   /* ----- Formulaire de contact ----- */
   const form = document.getElementById("contact-form");
