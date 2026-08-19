@@ -120,6 +120,39 @@
     });
   });
 
+  /* ----- Border Beam Panels : comètes dorées orbitant autour des cartes ----- */
+  const beamEls = Array.from(document.querySelectorAll(".beam-panel"));
+  if (beamEls.length && !reducedMotion) {
+    const IDLE = 42, FAST = 260, K = 30, D = 11;
+    const panels = beamEls.map((el, i) => ({
+      el,
+      angle: ((i * 137.508) % 360 + 360) % 360,
+      spd: IDLE, vel: 0, target: IDLE,
+    }));
+    panels.forEach((p) => {
+      p.el.style.setProperty("--mk-beam-a", p.angle.toFixed(2) + "deg");
+      p.el.addEventListener("pointerenter", () => { p.target = FAST; });
+      p.el.addEventListener("pointerleave", () => { p.target = IDLE; });
+      p.el.addEventListener("focus",        () => { p.target = FAST; }, true);
+      p.el.addEventListener("blur",         () => { p.target = IDLE; }, true);
+    });
+    let beamLast = 0;
+    const beamFrame = (now) => {
+      if (!beamLast) beamLast = now;
+      const dt = Math.min((now - beamLast) / 1000, 0.05);
+      beamLast = now;
+      panels.forEach((p) => {
+        const acc = K * (p.target - p.spd) - D * p.vel;
+        p.vel += acc * dt;
+        p.spd += p.vel * dt;
+        p.angle = (p.angle + p.spd * dt) % 360;
+        p.el.style.setProperty("--mk-beam-a", p.angle.toFixed(2) + "deg");
+      });
+      requestAnimationFrame(beamFrame);
+    };
+    requestAnimationFrame(beamFrame);
+  }
+
   /* ----- Formulaire de contact ----- */
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");

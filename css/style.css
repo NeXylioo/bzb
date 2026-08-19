@@ -1047,11 +1047,48 @@ h1, h2, h3, h4 {
 .delay-2 { transition-delay: 0.24s; }
 .delay-3 { transition-delay: 0.36s; }
 
+/* ===== Border Beam Panel ===== */
+/*
+ * Un dégradé conique tourne autour du bord de chaque panneau.
+ * Le mask composite (exclude) ne laisse visible que la zone de padding = le "filet" de bordure.
+ * La valeur CSS --mk-beam-a est mise à jour par le RAF en JS.
+ */
+.beam-panel { position: relative; }
+.beam-panel::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  z-index: 1;
+  background: conic-gradient(
+    from var(--mk-beam-a, 0deg),
+    transparent 0deg,
+    rgba(232,199,123,0.04) 18deg,
+    rgba(232,199,123,0.55) 46deg,
+    #e8c77b 56deg,
+    #fff5cc 60deg,
+    transparent 63deg,
+    transparent 198deg,
+    rgba(201,162,79,0.04) 216deg,
+    rgba(201,162,79,0.45) 244deg,
+    #c9a24f 254deg,
+    #ffd878 258deg,
+    transparent 261deg,
+    transparent 360deg
+  );
+  padding: 2px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; transition: none; }
   .hero__media img { transform: none !important; }
   .about__watermark { transform: none !important; }
+  .beam-panel::before { display: none; }
 }
 
 /* ==========================================================================
