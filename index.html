@@ -12,7 +12,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='3' y='3' width='94' height='94' fill='%230c0c0e' stroke='%23e8c77b' stroke-width='4'/%3E%3Cpath d='M50 18C38 34 28 46 28 58a22 22 0 0 0 44 0c0-12-10-24-22-40z' fill='%23e8c77b'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -152,7 +152,7 @@
             <img src="assets/img/fondateur.jpg" alt="Le fondateur de BLV WASH nettoyant un véhicule au jet haute pression" loading="lazy">
           </div>
           <div class="orbit orbit--about" aria-hidden="true">
-            <svg viewBox="0 0 200 200" class="orbit__ring orbit__ring--scroll">
+            <svg viewBox="0 0 200 200" class="orbit__ring orbit__ring--reverse">
               <defs><path id="orbit-circle-2" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
               <text class="orbit__text"><textPath href="#orbit-circle-2">SATISFACTION GARANTIE • TRAVAIL SOIGNÉ • </textPath></text>
             </svg>
@@ -237,14 +237,18 @@
           <span class="eyebrow eyebrow--gold">En images</span>
           <h2>Le soin du détail, <em class="accent-serif">en toutes circonstances</em></h2>
         </div>
-        <div class="gallery">
-          <figure class="gallery__item gallery__item--tall reveal-left"><img src="assets/img/g1.jpg" alt="Lavage à la main d'une voiture de sport avec la méthode des deux seaux" loading="lazy"><figcaption>Lavage main deux seaux</figcaption></figure>
-          <figure class="gallery__item gallery__item--tall reveal"><img src="assets/img/g2.jpg" alt="Séchage soigné d'un SUV noir en atelier" loading="lazy"><figcaption>Finitions en atelier</figcaption></figure>
-          <figure class="gallery__item reveal-right"><img src="assets/img/g3.jpg" alt="Nettoyage d'un volant à la microfibre" loading="lazy"><figcaption>Detailing intérieur</figcaption></figure>
-          <figure class="gallery__item reveal-right"><img src="assets/img/g6.jpg" alt="Voiture couverte de mousse active pendant le prélavage" loading="lazy"><figcaption>Prélavage mousse active</figcaption></figure>
-          <figure class="gallery__item reveal-left"><img src="assets/img/g7.jpg" alt="Nettoyage haute pression d'une berline à domicile" loading="lazy"><figcaption>Haute pression à domicile</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="assets/img/g5.jpg" alt="Brossage d'une jante au pinceau de detailing" loading="lazy"><figcaption>Rénovation des jantes</figcaption></figure>
-          <figure class="gallery__item reveal-right"><img src="assets/img/g4.jpg" alt="Nettoyage haute pression d'un escalier extérieur" loading="lazy"><figcaption>Haute pression extérieure</figcaption></figure>
+        <div class="hscroll" id="galerie-hscroll">
+          <div class="hscroll__sticky">
+            <div class="hscroll__track" id="galerie-track">
+              <figure class="gallery__item"><img src="assets/img/g1.jpg" alt="Lavage à la main d'une voiture de sport avec la méthode des deux seaux" loading="lazy"><figcaption>Lavage main deux seaux</figcaption></figure>
+              <figure class="gallery__item"><img src="assets/img/g2.jpg" alt="Séchage soigné d'un SUV noir en atelier" loading="lazy"><figcaption>Finitions en atelier</figcaption></figure>
+              <figure class="gallery__item"><img src="assets/img/g3.jpg" alt="Nettoyage d'un volant à la microfibre" loading="lazy"><figcaption>Detailing intérieur</figcaption></figure>
+              <figure class="gallery__item"><img src="assets/img/g6.jpg" alt="Voiture couverte de mousse active pendant le prélavage" loading="lazy"><figcaption>Prélavage mousse active</figcaption></figure>
+              <figure class="gallery__item"><img src="assets/img/g7.jpg" alt="Nettoyage haute pression d'une berline à domicile" loading="lazy"><figcaption>Haute pression à domicile</figcaption></figure>
+              <figure class="gallery__item"><img src="assets/img/g5.jpg" alt="Brossage d'une jante au pinceau de detailing" loading="lazy"><figcaption>Rénovation des jantes</figcaption></figure>
+              <figure class="gallery__item"><img src="assets/img/g4.jpg" alt="Nettoyage haute pression d'un escalier extérieur" loading="lazy"><figcaption>Haute pression extérieure</figcaption></figure>
+            </div>
+          </div>
         </div>
       </div>
     </section>

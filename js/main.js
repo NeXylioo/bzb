@@ -15,8 +15,9 @@
   /* ----- Parallaxe photo du hero ----- */
   const heroImg = document.getElementById("hero-img");
 
-  /* ----- Badge circulaire : rotation pilotée par le scroll ----- */
-  const scrollOrbits = document.querySelectorAll(".orbit__ring--scroll");
+  /* ----- Galerie horizontale pilotée par la molette ----- */
+  const hscroll = document.getElementById("galerie-hscroll");
+  const hscrollTrack = document.getElementById("galerie-track");
 
   /* ----- Filigrane qui glisse sur le côté ----- */
   const watermark = document.querySelector("[data-parallax-x]");
@@ -39,9 +40,12 @@
 
       if (!reducedMotion) {
         if (heroImg) heroImg.style.transform = "translateY(" + y * 0.25 + "px)";
-        scrollOrbits.forEach((el) => {
-          el.style.transform = "rotate(" + y * 0.12 + "deg)";
-        });
+        if (hscroll && hscrollTrack && window.innerWidth > 768) {
+          const total = hscroll.offsetHeight - window.innerHeight;
+          const progress = Math.min(Math.max((y - hscroll.offsetTop) / total, 0), 1);
+          const shift = Math.max(hscrollTrack.scrollWidth - window.innerWidth, 0);
+          hscrollTrack.style.transform = "translateX(" + -progress * shift + "px)";
+        }
         if (watermark) {
           watermark.style.transform = "translateX(" + (140 - y * 0.18) + "px)";
         }
