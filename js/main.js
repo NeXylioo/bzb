@@ -85,7 +85,22 @@
   );
   sections.forEach((s) => spy.observe(s));
 
-  /* ----- Animations d'apparition (fondu, glissé, rotation latérale) ----- */
+  /* ----- Titres : chaque titre monte depuis derrière un cache ----- */
+  // Fait en JS pour garder le HTML lisible : on enveloppe le contenu du titre
+  // dans un <span> que le cache (overflow:hidden) laisse coulisser.
+  document.querySelectorAll(".section__head h2, .hero h1, .cta h2").forEach((h) => {
+    const inner = document.createElement("span");
+    inner.innerHTML = h.innerHTML;
+    h.replaceChildren(inner);
+    // Le fondu-flou du .reveal se ferait couper net par le cache : le
+    // coulissement suffit, on retire l'apparition générique du titre.
+    h.classList.remove("reveal", "reveal-left", "reveal-right");
+    h.classList.add("mask");
+    // Le titre suit son bloc parent d'un souffle.
+    inner.style.transitionDelay = "0.08s";
+  });
+
+  /* ----- Apparitions au scroll ----- */
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -98,7 +113,7 @@
     { threshold: 0.12 }
   );
   document
-    .querySelectorAll(".reveal, .reveal-left, .reveal-right")
+    .querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale, .mask")
     .forEach((el) => revealObserver.observe(el));
 
   /* ----- Curseurs avant / après ----- */
