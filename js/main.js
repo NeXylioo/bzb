@@ -15,8 +15,6 @@
   /* ----- Parallaxe photo du hero ----- */
   const heroImg = document.getElementById("hero-img");
 
-  /* ----- Filigrane qui glisse sur le côté ----- */
-  const watermark = document.querySelector("[data-parallax-x]");
 
   /* ----- Bouton retour en haut ----- */
   const backtop = document.getElementById("backtop");
@@ -36,9 +34,6 @@
 
       if (!reducedMotion) {
         if (heroImg) heroImg.style.transform = "translateY(" + y * 0.25 + "px)";
-        if (watermark) {
-          watermark.style.transform = "translateX(" + (140 - y * 0.18) + "px)";
-        }
       }
 
       ticking = false;
@@ -116,16 +111,8 @@
     .querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale, .mask")
     .forEach((el) => revealObserver.observe(el));
 
-  /* ----- Curseurs avant / après ----- */
-  document.querySelectorAll("[data-ba]").forEach((figure) => {
-    const frame = figure.querySelector(".ba__frame");
-    const range = figure.querySelector(".ba__range");
-    range.addEventListener("input", () => {
-      frame.style.setProperty("--pos", range.value + "%");
-    });
-  });
 
-  /* ----- Border Beam Panels : comètes dorées orbitant autour des cartes ----- */
+  /* ----- Border Beam Panels : comètes bleues orbitant autour des cartes ----- */
   const beamEls = Array.from(document.querySelectorAll(".beam-panel"));
   if (beamEls.length && !reducedMotion) {
     const IDLE = 42, FAST = 260, K = 30, D = 11;

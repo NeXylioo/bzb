@@ -12,7 +12,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='3' y='3' width='94' height='94' fill='%230a0c12' stroke='%234d8bff' stroke-width='4'/%3E%3Cpath d='M50 18C38 34 28 46 28 58a22 22 0 0 0 44 0c0-12-10-24-22-40z' fill='%234d8bff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -33,16 +33,21 @@
       <nav class="nav" id="nav" aria-label="Navigation principale">
         <a href="#accueil" class="nav__link is-active">Accueil</a>
         <a href="#services" class="nav__link">Services</a>
-        <a href="#apropos" class="nav__link">À propos</a>
-        <a href="#realisations" class="nav__link">Réalisations</a>
+        <a href="#methode" class="nav__link">Méthode</a>
         <a href="#galerie" class="nav__link">Galerie</a>
-        <a href="#avis" class="nav__link">Avis</a>
-        <a href="#contact" class="btn btn--primary btn--sm nav__cta">Me contacter</a>
+        <a href="#contact" class="nav__link">Contact</a>
       </nav>
 
-      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="header__actions">
+        <!-- TODO : remplacer par le vrai numéro (ici et dans le footer). -->
+        <a href="tel:+33612345678" class="header__phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+          <span>06 12 34 56 78</span>
+        </a>
+        <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -58,25 +63,15 @@
       <div class="container hero__inner">
         <div class="hero__content">
           <span class="eyebrow eyebrow--accent reveal">Detailing &amp; nettoyage d'exception</span>
-          <h1 class="reveal delay-1">L'art de rendre <em class="accent-serif">l'éclat</em> à ce qui compte pour vous.</h1>
+          <h1 class="reveal delay-1">L'art de rendre <em class="accent-word">l'éclat</em> à ce qui compte pour vous.</h1>
           <p class="hero__lead reveal delay-2">Detailing automobile et nettoyage extérieur, réalisés à la main, chez vous.</p>
           <div class="hero__actions reveal delay-3">
             <a href="#contact" class="btn btn--primary btn--lg">Me contacter</a>
-            <a href="#apropos" class="btn btn--outline-light btn--lg">Qui suis-je ?</a>
+            <a href="tel:+33612345678" class="btn btn--outline-light btn--lg">06 12 34 56 78</a>
           </div>
         </div>
 
-        <!-- Badge circulaire qui tourne au scroll -->
-        <div class="orbit" aria-hidden="true">
-          <svg viewBox="0 0 200 200" class="orbit__ring" id="orbit-hero">
-            <defs><path id="orbit-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
-            <text class="orbit__text"><textPath href="#orbit-circle">BLV WASH • PREMIUM DETAILING • NETTOYAGE EXTÉRIEUR • </textPath></text>
-          </svg>
-          <span class="orbit__center">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-          </span>
         </div>
-      </div>
 
       <div class="hero__statbar">
         <div class="container hero__promises">
@@ -100,7 +95,7 @@
       <div class="container">
         <div class="section__head reveal">
           <span class="eyebrow eyebrow--accent">Nos services</span>
-          <h2>Deux expertises, <em class="accent-serif">un même niveau d'exigence</em></h2>
+          <h2>Deux expertises, <em class="accent-word">un même niveau d'exigence</em></h2>
         </div>
 
         <div class="services__grid">
@@ -143,51 +138,12 @@
       </div>
     </section>
 
-    <!-- ===== À propos / Fondateur ===== -->
-    <section class="section section--alt about" id="apropos">
-      <div class="about__watermark" aria-hidden="true" data-parallax-x>PASSION&nbsp;·&nbsp;PRÉCISION</div>
-      <div class="container about__inner">
-        <div class="about__media reveal-left">
-          <div class="about__frame">
-            <img src="assets/img/fondateur.jpg" alt="Le fondateur de BLV WASH nettoyant un véhicule au jet haute pression" loading="lazy">
-          </div>
-          <div class="orbit orbit--about" aria-hidden="true">
-            <svg viewBox="0 0 200 200" class="orbit__ring orbit__ring--reverse">
-              <defs><path id="orbit-circle-2" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
-              <text class="orbit__text"><textPath href="#orbit-circle-2">SATISFACTION GARANTIE • TRAVAIL SOIGNÉ • </textPath></text>
-            </svg>
-            <span class="orbit__center orbit__center--accent">✦</span>
-          </div>
-        </div>
-
-        <div class="about__content">
-          <span class="eyebrow eyebrow--accent reveal">Qui suis-je ?</span>
-          <h2 class="reveal">La propreté, <em class="accent-serif">une passion</em> devenue métier</h2>
-          <p class="reveal delay-1">
-            Un artisan, un seul interlocuteur, une conviction : <strong>votre véhicule et votre
-            maison méritent le même soin que s'ils étaient les miens</strong>.
-          </p>
-
-          <ul class="about__values reveal delay-2">
-            <li><span>◆</span><div><strong>Exigence artisanale</strong></div></li>
-            <li><span>◆</span><div><strong>Transparence totale</strong></div></li>
-            <li><span>◆</span><div><strong>Respect des surfaces</strong></div></li>
-          </ul>
-
-          <div class="about__sign reveal delay-3">
-            <span class="about__signature">BLV Wash</span>
-            <span class="about__signrole">Fondateur — votre interlocuteur unique</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== Méthode ===== -->
-    <section class="section" id="methode">
+    <section class="section section--alt" id="methode">
       <div class="container">
         <div class="section__head reveal">
           <span class="eyebrow eyebrow--accent">Notre méthode</span>
-          <h2>Simple, rapide, <em class="accent-serif">sans surprise</em></h2>
+          <h2>Simple, rapide, <em class="accent-word">sans surprise</em></h2>
         </div>
         <ol class="steps">
           <li class="step reveal"><span class="step__num">1</span><h3>Vous nous contactez</h3></li>
@@ -198,44 +154,12 @@
       </div>
     </section>
 
-    <!-- ===== Réalisations (avant/après) ===== -->
-    <section class="section" id="realisations">
-      <div class="container">
-        <div class="section__head reveal">
-          <span class="eyebrow eyebrow--accent">Réalisations</span>
-          <h2>Avant / Après : <em class="accent-serif">la différence BLV WASH</em></h2>
-        </div>
-
-        <div class="ba__grid">
-          <figure class="ba reveal-left" data-ba>
-            <div class="ba__frame">
-              <div class="ba__side ba__side--before"><span class="ba__label">Avant</span><svg viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="260" fill="#4a4438"/><g fill="#6b6350"><rect x="0" y="0" width="95" height="60"/><rect x="105" y="0" width="95" height="60"/><rect x="210" y="0" width="95" height="60"/><rect x="315" y="0" width="85" height="60"/><rect x="0" y="70" width="95" height="60"/><rect x="105" y="70" width="95" height="60"/><rect x="210" y="70" width="95" height="60"/><rect x="315" y="70" width="85" height="60"/><rect x="0" y="140" width="95" height="60"/><rect x="105" y="140" width="95" height="60"/><rect x="210" y="140" width="95" height="60"/><rect x="315" y="140" width="85" height="60"/><rect x="0" y="210" width="95" height="50"/><rect x="105" y="210" width="95" height="50"/><rect x="210" y="210" width="95" height="50"/><rect x="315" y="210" width="85" height="50"/></g><g fill="#3f5233" opacity=".65"><ellipse cx="60" cy="40" rx="50" ry="26"/><ellipse cx="330" cy="100" rx="60" ry="30"/><ellipse cx="150" cy="200" rx="70" ry="34"/><ellipse cx="260" cy="60" rx="34" ry="18"/></g></svg></div>
-              <div class="ba__side ba__side--after"><span class="ba__label ba__label--after">Après</span><svg viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="260" fill="#b9a488"/><g fill="#d6c3a5"><rect x="0" y="0" width="95" height="60"/><rect x="105" y="0" width="95" height="60"/><rect x="210" y="0" width="95" height="60"/><rect x="315" y="0" width="85" height="60"/><rect x="0" y="70" width="95" height="60"/><rect x="105" y="70" width="95" height="60"/><rect x="210" y="70" width="95" height="60"/><rect x="315" y="70" width="85" height="60"/><rect x="0" y="140" width="95" height="60"/><rect x="105" y="140" width="95" height="60"/><rect x="210" y="140" width="95" height="60"/><rect x="315" y="140" width="85" height="60"/><rect x="0" y="210" width="95" height="50"/><rect x="105" y="210" width="95" height="50"/><rect x="210" y="210" width="95" height="50"/><rect x="315" y="210" width="85" height="50"/></g></svg></div>
-              <div class="ba__handle" aria-hidden="true"><span></span></div>
-              <input type="range" class="ba__range" min="0" max="100" value="50" aria-label="Comparer avant et après — terrasse">
-            </div>
-            <figcaption>Terrasse carrelée — nettoyage haute pression + anti-mousse</figcaption>
-          </figure>
-
-          <figure class="ba reveal-right" data-ba>
-            <div class="ba__frame">
-              <div class="ba__side ba__side--before"><span class="ba__label">Avant</span><svg viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="260" fill="#57534e"/><path d="M60 190 Q65 150 105 142 L130 112 Q140 98 158 96 L262 96 Q280 98 291 113 L314 142 Q356 148 361 184 Q363 200 350 202 L73 202 Q58 200 60 190 Z" fill="#6b7280"/><circle cx="125" cy="203" r="24" fill="#292524"/><circle cx="300" cy="203" r="24" fill="#292524"/><g fill="#78716c" opacity=".8"><ellipse cx="180" cy="130" rx="30" ry="12"/><ellipse cx="250" cy="160" rx="40" ry="14"/><ellipse cx="120" cy="165" rx="26" ry="10"/></g></svg></div>
-              <div class="ba__side ba__side--after"><span class="ba__label ba__label--after">Après</span><svg viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><rect width="400" height="260" fill="#141416"/><path d="M60 190 Q65 150 105 142 L130 112 Q140 98 158 96 L262 96 Q280 98 291 113 L314 142 Q356 148 361 184 Q363 200 350 202 L73 202 Q58 200 60 190 Z" fill="#38bdf8"/><path d="M150 112 Q156 105 165 104 L200 104 L200 138 L128 138 Z" fill="#0b1f33"/><path d="M212 104 L258 104 Q270 105 277 115 L293 138 L212 138 Z" fill="#0b1f33"/><circle cx="125" cy="203" r="24" fill="#0b1f33"/><circle cx="125" cy="203" r="10" fill="#475569"/><circle cx="300" cy="203" r="24" fill="#0b1f33"/><circle cx="300" cy="203" r="10" fill="#475569"/><path d="M180 70 l6 13 13 6 -13 6 -6 13 -6 -13 -13 -6 13 -6 z" fill="#e0f2fe"/></svg></div>
-              <div class="ba__handle" aria-hidden="true"><span></span></div>
-              <input type="range" class="ba__range" min="0" max="100" value="50" aria-label="Comparer avant et après — véhicule">
-            </div>
-            <figcaption>Berline — detailing complet avec protection céramique</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== Galerie ===== -->
-    <section class="section section--alt" id="galerie">
+    <section class="section" id="galerie">
       <div class="container">
         <div class="section__head reveal">
           <span class="eyebrow eyebrow--accent">En images</span>
-          <h2>Le soin du détail, <em class="accent-serif">en toutes circonstances</em></h2>
+          <h2>Le soin du détail, <em class="accent-word">en toutes circonstances</em></h2>
         </div>
         <div class="carousel-3d" id="galerie-carousel">
           <div class="carousel-3d__viewport" id="carousel-viewport">
@@ -259,61 +183,6 @@
       </div>
     </section>
 
-    <!-- ===== Avis ===== -->
-    <section class="section" id="avis">
-      <div class="container">
-        <div class="section__head reveal">
-          <span class="eyebrow eyebrow--accent">Ils nous font confiance</span>
-          <h2>Ce que disent <em class="accent-serif">nos clients</em></h2>
-        </div>
-        <div class="reviews">
-          <blockquote class="review beam-panel reveal">
-            <div class="review__stars" aria-label="5 étoiles sur 5">★★★★★</div>
-            <p>« On dirait que la terrasse vient d'être posée. Travail très propre. »</p>
-            <footer><span class="review__avatar">S</span><div><strong>Sophie M.</strong><span>Nettoyage terrasse</span></div></footer>
-          </blockquote>
-          <blockquote class="review beam-panel reveal delay-1">
-            <div class="review__stars" aria-label="5 étoiles sur 5">★★★★★</div>
-            <p>« Intérieur comme neuf, carrosserie brillante, aucune trace. Je recommande les yeux fermés. »</p>
-            <footer><span class="review__avatar">K</span><div><strong>Karim B.</strong><span>Detailing automobile complet</span></div></footer>
-          </blockquote>
-          <blockquote class="review beam-panel reveal delay-2">
-            <div class="review__stars" aria-label="5 étoiles sur 5">★★★★★</div>
-            <p>« Prix honnête, résultat impeccable, et ils se déplacent. On refera appel à eux. »</p>
-            <footer><span class="review__avatar">L</span><div><strong>Laurent D.</strong><span>Façade + allées</span></div></footer>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== FAQ ===== -->
-    <section class="section section--alt" id="faq">
-      <div class="container container--narrow">
-        <div class="section__head reveal">
-          <span class="eyebrow eyebrow--accent">FAQ</span>
-          <h2>Questions <em class="accent-serif">fréquentes</em></h2>
-        </div>
-        <div class="faq reveal">
-          <details class="faq__item" open>
-            <summary>Vous déplacez-vous à domicile ?</summary>
-            <p>Oui, chez vous ou sur votre lieu de travail, avec tout notre matériel.</p>
-          </details>
-          <details class="faq__item">
-            <summary>Vos produits abîment-ils les surfaces ?</summary>
-            <p>Non. Chaque matériau reçoit un produit professionnel adapté, et les zones sensibles sont protégées.</p>
-          </details>
-          <details class="faq__item">
-            <summary>Comment se passe le paiement ?</summary>
-            <p>Après l'intervention, une fois le résultat validé ensemble.</p>
-          </details>
-          <details class="faq__item">
-            <summary>Proposez-vous un entretien régulier ?</summary>
-            <p>Oui, pour les particuliers comme pour les entreprises et les flottes.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== CTA ===== -->
     <section class="cta">
       <div class="cta__media" aria-hidden="true">
@@ -322,7 +191,7 @@
       </div>
       <div class="container cta__inner reveal">
         <span class="eyebrow eyebrow--accent">Prêt à franchir le pas ?</span>
-        <h2>Offrez à votre véhicule et à vos extérieurs <em class="accent-serif">l'éclat qu'ils méritent</em></h2>
+        <h2>Offrez à votre véhicule et à vos extérieurs <em class="accent-word">l'éclat qu'ils méritent</em></h2>
         <div class="cta__actions">
           <a href="#contact" class="btn btn--primary btn--lg">Me contacter</a>
           <a href="mailto:contact@blvwash.fr" class="btn btn--outline-light btn--lg">contact@blvwash.fr</a>
@@ -331,11 +200,11 @@
     </section>
 
     <!-- ===== Contact ===== -->
-    <section class="section" id="contact">
+    <section class="section section--alt" id="contact">
       <div class="container">
         <div class="section__head reveal">
           <span class="eyebrow eyebrow--accent">Contact</span>
-          <h2>Parlons de <em class="accent-serif">votre projet</em></h2>
+          <h2>Parlons de <em class="accent-word">votre projet</em></h2>
         </div>
 
         <div class="contact">
@@ -413,19 +282,13 @@
         <a href="#services">Detailing automobile</a>
         <a href="#services">Nettoyage terrasse</a>
         <a href="#services">Façades &amp; toitures</a>
-        <a href="#galerie">Galerie</a>
-      </div>
-      <div class="footer__col">
-        <h4>Entreprise</h4>
-        <a href="#apropos">À propos</a>
-        <a href="#realisations">Réalisations</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#faq">FAQ</a>
+        <a href="#methode">Méthode</a>
       </div>
       <div class="footer__col">
         <h4>Contact</h4>
+        <a href="tel:+33612345678">06 12 34 56 78</a>
         <a href="mailto:contact@blvwash.fr">contact@blvwash.fr</a>
-        <a href="#contact">Me contacter</a>
+        <a href="#contact">Formulaire</a>
       </div>
     </div>
     <div class="container footer__bottom">
