@@ -734,9 +734,11 @@ h1, h2, h3, h4 {
   overflow: hidden;
 }
 .carousel-3d__viewport {
+  position: relative;
   width: 100%;
   height: 100%;
-  perspective: 1000px;
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -753,45 +755,97 @@ h1, h2, h3, h4 {
 }
 .carousel-3d__face {
   position: absolute;
-  height: 82%;
-  top: 9%;
-  left: 0;
+  height: 78%;
+  top: 11%;
+  left: 50%;
   margin: 0;
-  padding: 10px;
+  padding: 0 10px;
   cursor: pointer;
-  /* width & transform injected by JS */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* width, margin-left & transform injected by JS */
 }
-.carousel-3d__face img {
+.carousel-3d__card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ink-800);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.6);
+}
+/* La carte est en overflow:hidden — on ramène le filet à l'intérieur du cadre. */
+.carousel-3d__card.beam-panel::before { inset: 0; padding: 3px; }
+
+.carousel-3d__card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 1px solid var(--border);
   display: block;
-  transition: filter 0.35s ease, transform 0.35s ease;
+  /* Sans ça le navigateur lance son drag natif d'image et avale les mousemove. */
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+  transition: filter 0.35s ease, transform 0.5s ease;
 }
-.carousel-3d__face:hover img {
-  filter: brightness(1.12);
-  transform: scale(1.03);
+.carousel-3d__face:hover .carousel-3d__card img {
+  filter: brightness(1.14);
+  transform: scale(1.05);
 }
-.carousel-3d__face figcaption {
+.carousel-3d__card figcaption {
   position: absolute;
-  inset: auto 10px 10px;
-  padding: 2rem 1rem 0.85rem;
-  background: linear-gradient(0deg, rgba(0,0,0,0.88), transparent);
+  inset: auto 0 0 0;
+  padding: 2.2rem 1rem 0.9rem;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.92), transparent);
   font-family: var(--font-head);
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   letter-spacing: 0.04em;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.carousel-3d__face:hover figcaption { opacity: 1; }
+.carousel-3d__face:hover .carousel-3d__card figcaption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Voile latéral : les cartes s'effacent doucement sur les bords */
+.carousel-3d__viewport::before,
+.carousel-3d__viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 13%;
+  pointer-events: none;
+  z-index: 3;
+}
+.carousel-3d__viewport::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(6, 6, 7, 0.9), transparent);
+}
+.carousel-3d__viewport::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(6, 6, 7, 0.9), transparent);
+}
+
+.carousel-3d__hint {
+  text-align: center;
+  margin-top: 1.4rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: var(--font-head);
+}
 
 /* Overlay zoom */
 .carousel-3d__overlay {
   position: fixed;
   inset: 0;
-  background: rgba(6, 6, 7, 0.93);
+  background: rgba(6, 6, 7, 0.97);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 200;
   display: flex;
   align-items: center;

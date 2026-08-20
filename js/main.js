@@ -156,13 +156,15 @@
     const faceCount = faces.length;
 
     const setup = () => {
-      const isMobile = window.innerWidth <= 640;
-      const cylW  = isMobile ? 1100 : 1800;
-      const faceW = cylW / faceCount;
-      const rad   = cylW / (2 * Math.PI);
-      cylinder.style.width = cylW + "px";
+      const w = window.innerWidth;
+      const faceW = w <= 640 ? 210 : w <= 1024 ? 270 : 340;
+      // Rayon pour que les faces se touchent presque : demi-largeur / tan(π/n).
+      const rad = Math.round((faceW * 1.12 / 2) / Math.tan(Math.PI / faceCount));
+      cylinder.style.width = faceW + "px";
       faces.forEach((face, i) => {
         face.style.width = faceW + "px";
+        // left:50% place le bord gauche au centre — on recentre la face dessus.
+        face.style.marginLeft = -faceW / 2 + "px";
         face.style.transform =
           "rotateY(" + (i * 360 / faceCount) + "deg) translateZ(" + rad + "px)";
       });
@@ -170,36 +172,40 @@
     setup();
     window.addEventListener("resize", setup);
 
-    let rot = 0, vel = 0, dragging = false;
-    let pxStart = 0, pxLast = 0, active = true, rafId = null;
+    const AUTO = 0.11;   // rotation de fond, en degrés par frame
+    let rot = 0, vel = AUTO, dragging = false;
+    let pxStart = 0, pxLast = 0, active = true;
 
-    const applyRot = () => { cylinder.style.transform = "rotateY(" + rot + "deg)"; };
+    const applyRot = () => {
+      cylinder.style.transform = "rotateY(" + rot.toFixed(2) + "deg)";
+    };
+    applyRot();
 
-    const stopRaf = () => { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } };
-    const startMomentum = () => {
-      stopRaf();
-      const tick = () => {
-        if (dragging) return;
-        vel *= 0.955;
+    // Boucle unique : l'élan du drag retombe progressivement sur la rotation de fond.
+    const tick = () => {
+      if (active && !dragging) {
+        vel += (AUTO - vel) * 0.045;
         rot += vel;
         applyRot();
-        rafId = Math.abs(vel) > 0.01 ? requestAnimationFrame(tick) : null;
-      };
-      rafId = requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     };
+    if (!reducedMotion) requestAnimationFrame(tick);
 
-    const pDown = (x) => { if (!active) return; dragging = true; pxStart = pxLast = x; vel = 0; stopRaf(); };
+    const pDown = (x) => { if (!active) return; dragging = true; pxStart = pxLast = x; vel = 0; };
     const pMove = (x) => {
       if (!dragging || !active) return;
       const dx = x - pxLast;
-      vel = dx * 0.05;
+      vel = dx * 0.16;
       rot += vel;
       applyRot();
       pxLast = x;
     };
-    const pUp = () => { if (!dragging) return; dragging = false; startMomentum(); };
+    const pUp = () => { dragging = false; };
 
-    viewport.addEventListener("mousedown",  (e) => pDown(e.clientX));
+    // Coupe le drag natif d'image, qui sinon capture mousemove/mouseup.
+    viewport.addEventListener("dragstart", (e) => e.preventDefault());
+    viewport.addEventListener("mousedown",  (e) => { e.preventDefault(); pDown(e.clientX); });
     window.addEventListener ("mousemove",   (e) => pMove(e.clientX));
     window.addEventListener ("mouseup",     pUp);
     viewport.addEventListener("touchstart", (e) => pDown(e.touches[0].clientX), { passive: true });
@@ -214,7 +220,7 @@
         zoomImg.src = img.src;
         zoomImg.alt = img.alt || "";
         overlay.classList.add("is-open");
-        active = false; stopRaf();
+        active = false;
       });
     });
 
