@@ -112,37 +112,42 @@
     .forEach((el) => revealObserver.observe(el));
 
 
-  /* ----- Border Beam Panels : comètes bleues orbitant autour des cartes ----- */
-  const beamEls = Array.from(document.querySelectorAll(".beam-panel"));
-  if (beamEls.length && !reducedMotion) {
-    const IDLE = 42, FAST = 260, K = 30, D = 11;
-    const panels = beamEls.map((el, i) => ({
-      el,
-      angle: ((i * 137.508) % 360 + 360) % 360,
-      spd: IDLE, vel: 0, target: IDLE,
-    }));
-    panels.forEach((p) => {
-      p.el.style.setProperty("--mk-beam-a", p.angle.toFixed(2) + "deg");
-      p.el.addEventListener("pointerenter", () => { p.target = FAST; });
-      p.el.addEventListener("pointerleave", () => { p.target = IDLE; });
-      p.el.addEventListener("focus",        () => { p.target = FAST; }, true);
-      p.el.addEventListener("blur",         () => { p.target = IDLE; }, true);
-    });
-    let beamLast = 0;
-    const beamFrame = (now) => {
-      if (!beamLast) beamLast = now;
-      const dt = Math.min((now - beamLast) / 1000, 0.05);
-      beamLast = now;
-      panels.forEach((p) => {
-        const acc = K * (p.target - p.spd) - D * p.vel;
-        p.vel += acc * dt;
-        p.spd += p.vel * dt;
-        p.angle = (p.angle + p.spd * dt) % 360;
-        p.el.style.setProperty("--mk-beam-a", p.angle.toFixed(2) + "deg");
-      });
-      requestAnimationFrame(beamFrame);
+
+  /* ----- Défilement fluide à la molette -----
+     On interpole window.scrollY plutôt que de transformer un conteneur :
+     un transform sur un parent casserait tous les position:fixed de la page
+     (header, bouton retour, overlay de la galerie). */
+  if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
+    let target = window.scrollY;
+    let gliding = false;
+
+    const limit = () =>
+      Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+
+    const glide = () => {
+      const diff = target - window.scrollY;
+      if (Math.abs(diff) < 0.4) {
+        window.scrollTo(0, target);
+        gliding = false;
+        return;
+      }
+      window.scrollTo(0, window.scrollY + diff * 0.12);
+      requestAnimationFrame(glide);
     };
-    requestAnimationFrame(beamFrame);
+
+    window.addEventListener("wheel", (e) => {
+      // On laisse passer le zoom navigateur et le scroll interne d'un champ.
+      if (e.ctrlKey || e.defaultPrevented) return;
+      e.preventDefault();
+      target = Math.min(Math.max(target + e.deltaY, 0), limit());
+      if (!gliding) { gliding = true; requestAnimationFrame(glide); }
+    }, { passive: false });
+
+    // Clavier, barre de défilement, ancres : on se recale sur la position réelle.
+    window.addEventListener("scroll", () => {
+      if (!gliding) target = window.scrollY;
+    }, { passive: true });
+    window.addEventListener("resize", () => { target = window.scrollY; });
   }
 
   /* ----- Galerie — carousel 3D cylindrique ----- */
