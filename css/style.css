@@ -11,9 +11,12 @@
   --ink-800: #151519;
   --ink-700: #1d1d22;
 
-  --accent: #4b8dff;
-  --accent-strong: #2f6ae0;
-  --accent-soft: rgba(75, 141, 255, 0.12);
+  --accent: #d4a24c;
+  --accent-light: #e8c87a;
+  --accent-strong: #b8862f;
+  --accent-soft: rgba(212, 162, 76, 0.12);
+  /* Texte posé SUR l'or : l'or est clair, il lui faut du sombre. */
+  --on-accent: #0b0b0e;
 
   --text: #f3f3f1;
   --text-muted: #9a9aa4;
@@ -53,7 +56,7 @@ h1, h2, h3, h4 {
   letter-spacing: -0.022em;
 }
 
-::selection { background: var(--accent); color: #fff; }
+::selection { background: var(--accent); color: var(--on-accent); }
 
 .container {
   width: min(100% - 2.5rem, var(--container));
@@ -120,7 +123,7 @@ h1, h2, h3, h4 {
 .btn__arrow { transition: transform 0.4s var(--ease); }
 .btn:hover .btn__arrow { transform: translateX(5px); }
 
-.btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn--primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .btn--primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); transform: translateY(-2px); }
 
 .btn--light { background: var(--text); border-color: var(--text); color: var(--ink-950); }
@@ -155,25 +158,55 @@ h1, h2, h3, h4 {
   height: var(--header-h);
 }
 
-.logo { display: inline-flex; align-items: center; gap: 0.65rem; }
-.logo__mark { width: 26px; height: 26px; flex-shrink: 0; }
+.logo { display: inline-flex; align-items: center; }
+/* Reprise typographique du logo : BLV, le L en or, "Wash" souligné dessous. */
+.logo__lockup { display: block; line-height: 1; }
 .logo__text {
-  font-weight: 800;
-  font-size: 1.12rem;
-  letter-spacing: 0.04em;
+  display: block;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
   line-height: 1;
 }
-.logo__text em { font-style: normal; color: var(--accent); }
+.logo__text em {
+  font-style: normal;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 1.12em;
+  background: linear-gradient(170deg, var(--accent-light), var(--accent-strong));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.logo__sub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.28rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  color: var(--text-muted);
+}
+.logo__sub::before, .logo__sub::after {
+  content: "";
+  width: 0.5rem;
+  height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
 /* Nom de la branche, sous le logo */
 .logo__branch {
   display: block;
-  font-size: 0.6rem;
+  margin-top: 0.3rem;
+  font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.3em;
-  color: var(--text-dim);
-  margin-top: 0.28rem;
+  color: var(--accent);
 }
-.logo--footer .logo__text { font-size: 1rem; }
+.logo--footer .logo__text { font-size: 1.3rem; }
 
 .nav { display: flex; align-items: center; gap: 1.9rem; }
 .nav__link {
@@ -212,8 +245,8 @@ h1, h2, h3, h4 {
   gap: 0.55rem;
   padding: 0.72rem 1.25rem;
   background: var(--accent);
-  color: #fff;
-  font-weight: 600;
+  color: var(--on-accent);
+  font-weight: 700;
   font-size: 0.85rem;
   white-space: nowrap;
   transition: background 0.35s var(--ease), transform 0.35s var(--ease);
@@ -293,12 +326,14 @@ h1, h2, h3, h4 {
   padding: 3.5rem clamp(1.6rem, 4vw, 4rem) clamp(3rem, 7vh, 5rem);
 }
 .split__num {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  color: var(--accent);
   display: block;
-  margin-bottom: 1.1rem;
+  font-size: clamp(2.4rem, 3.6vw, 3.2rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  margin-bottom: 1rem;
 }
 .split__title {
   font-size: clamp(1.9rem, 3.4vw, 3rem);
@@ -499,12 +534,16 @@ h1, h2, h3, h4 {
 }
 .section--alt .pillar { background: var(--ink-900); }
 .pillar__num {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.26em;
-  color: var(--accent);
+  display: block;
+  font-size: clamp(2.6rem, 4.4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  margin-bottom: 1.2rem;
 }
-.pillar h3 { font-size: 1.18rem; margin: 1.1rem 0 0.6rem; }
+.pillar h3 { font-size: 1.22rem; margin: 0 0 0.6rem; }
 .pillar p { color: var(--text-muted); font-size: 0.94rem; }
 
 /* ===== Cartes de prestation ===== */
@@ -989,3 +1028,134 @@ h1, h2, h3, h4 {
   .crossover__body { flex-direction: column; align-items: flex-start; }
   .reveal-left, .reveal-right { transform: translateY(28px); }
 }
+
+
+/* ==========================================================================
+   Tarifs — cartes de formule (page Auto uniquement)
+   ========================================================================== */
+.tariffs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.tariff {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink-850);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+  transition: transform 0.7s var(--ease), border-color 0.5s var(--ease);
+}
+.section--alt .tariff { background: var(--ink-800); }
+.tariff:hover { transform: translateY(-8px); border-color: rgba(212, 162, 76, 0.35); }
+
+/* La formule mise en avant : filet or et mention */
+.tariff--feature { border-color: rgba(212, 162, 76, 0.45); }
+.tariff__flag {
+  position: absolute;
+  top: 0; right: 0;
+  z-index: 3;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: 0.42rem 0.9rem;
+}
+
+.tariff__media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+.tariff__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.25) brightness(0.72);
+  transition: transform 1s var(--ease), filter 0.7s var(--ease);
+}
+.tariff:hover .tariff__media img { transform: scale(1.06); filter: grayscale(0) brightness(0.88); }
+.tariff__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, var(--ink-850) 2%, transparent 60%);
+}
+.section--alt .tariff__media::after {
+  background: linear-gradient(0deg, var(--ink-800) 2%, transparent 60%);
+}
+
+.tariff__body { padding: 0 1.7rem 1.9rem; display: flex; flex-direction: column; flex: 1; }
+
+.tariff__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 1.2rem;
+}
+.tariff__name { font-size: 1.35rem; }
+.tariff__price {
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(150deg, var(--accent-light), var(--accent-strong));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.tariff__price small { font-size: 0.5em; font-weight: 600; letter-spacing: 0; }
+.tariff__time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+  margin-bottom: 1.1rem;
+}
+.tariff__time svg { width: 14px; height: 14px; }
+
+.tariff__list { list-style: none; flex: 1; margin-bottom: 1.5rem; }
+.tariff__list li {
+  position: relative;
+  padding: 0.46rem 0 0.46rem 1.5rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-soft);
+}
+.tariff__list li:last-child { border-bottom: 0; }
+.tariff__list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 1.08em;
+  width: 7px; height: 1px;
+  background: var(--accent);
+}
+
+/* Options et mentions, sous les cartes */
+.tariff__note {
+  margin-top: 1.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 2rem;
+  align-items: center;
+  padding: 1.3rem 1.6rem;
+  border: 1px solid var(--border-soft);
+  background: var(--ink-850);
+}
+.section--alt .tariff__note { background: var(--ink-800); }
+.tariff__note strong {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+}
+.tariff__note span { font-size: 0.93rem; color: var(--text-muted); }
+.tariff__note b { color: var(--text); font-weight: 600; }

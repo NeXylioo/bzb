@@ -28,27 +28,28 @@ L'accueil ne fait qu'une chose : proposer le choix entre les deux activités. De
 
 Les deux pages suivent le même squelette :
 
-| Section | Contenu |
-|---|---|
-| Hero | Photo plein cadre, accroche, appel au téléphone |
-| Intention | Une phrase forte, puis trois arguments |
-| Prestations | Cartes photo, chacune avec son détail |
-| Secteurs / Zone | Liste éditoriale numérotée |
-| Protocole | Étapes dans une piste horizontale qui se glisse à la souris |
-| Réalisations | Galerie dans la même piste horizontale |
-| Passerelle | Renvoi vers l'autre activité |
-| Appel | Bandeau photo avec le numéro |
-| Contact | Coordonnées + formulaire |
+| Section | Auto | Service |
+|---|---|---|
+| Hero | ✓ | ✓ |
+| Trois arguments numérotés | ✓ | ✓ |
+| Prestations | Cartes tarifaires, **prix affichés** | Cartes photo, prix sur demande |
+| Secteurs | — | Liste éditoriale numérotée |
+| Protocole | Piste horizontale qui se glisse à la souris | idem |
+| Réalisations | Galerie dans la même piste | idem |
+| Passerelle vers l'autre activité | ✓ | ✓ |
+| Appel + Contact | ✓ | ✓ |
+
+Les tarifs ne figurent que sur la page Auto : ils se règlent dans le bloc `.tariffs` d'`auto.html`. Côté Service, le prix dépend des locaux et se donne au téléphone.
 
 ## À personnaliser en priorité
 
 | Élément | Où le modifier |
 |---|---|
-| **Numéro de téléphone** | Les trois fichiers HTML : rechercher `+33612345678` (le lien) et `06 12 34 56 78` (l'affichage) |
-| **Logo** | Les `<svg class="logo__mark">` dans l'en-tête et le pied de page, plus le `<link rel="icon">`. Pour un fichier image, remplacez le `<svg>` par `<img src="assets/img/logo.svg" alt="BLV WASH">` |
-| Email `contact@blvwash.fr` | Les trois fichiers HTML et `js/main.js` |
-| Zone d'intervention | Section Contact de chaque page |
-| Réseaux sociaux | Pied de page (liens `#` à remplacer par vos URLs) |
+| **Numéro de téléphone** | Les trois fichiers HTML : `+33776690722` (le lien) et `07 76 69 07 22` (l'affichage) |
+| **Logo** | Reconstruit en texte : `.logo__lockup` (BLV, le L en or serif, « Wash » dessous). Pour poser le vrai fichier, remplacez le contenu de `.logo__lockup` par `<img src="assets/img/logo.png" alt="BLV WASH">` |
+| Email `oscar.bellavia2026@outlook.fr` | Les trois fichiers HTML et `js/main.js` |
+| Secteur (57 / 54 / Luxembourg) | Section Contact et pied de page de chaque page |
+| Réseaux sociaux | Pied de page — Instagram et TikTok pointent sur `@blvwash` |
 | Couleurs | Variables CSS en tête de `css/style.css` (`:root`) |
 
 ### Thème
@@ -56,11 +57,13 @@ Les deux pages suivent le même squelette :
 Le site est sombre. Une seule couleur d'accent le pilote :
 
 ```css
---accent: #4b8dff;        /* liens, libellés, boutons */
---accent-strong: #2f6ae0; /* survol des boutons */
+--accent: #d4a24c;        /* or : liens, libellés, boutons, chiffres */
+--accent-light: #e8c87a;  /* haut des dégradés (prix, L du logo) */
+--accent-strong: #b8862f; /* bas des dégradés, survol des boutons */
+--on-accent: #0b0b0e;     /* texte posé SUR l'or : il doit rester sombre */
 ```
 
-Changer `--accent` suffit à retourner tout le site. Les fonds vont de `--ink-950` (le plus sombre, fond de page) à `--ink-700`, et les sections alternent entre `--ink-950` et `--ink-900` via la classe `section--alt`.
+Changer `--accent` suffit à retourner tout le site. Attention à `--on-accent` : l'or étant clair, le texte posé dessus est sombre. Si vous passez sur une teinte foncée, il devra redevenir blanc. Les fonds vont de `--ink-950` (le plus sombre, fond de page) à `--ink-700`, et les sections alternent entre `--ink-950` et `--ink-900` via la classe `section--alt`.
 
 Police unique : **Inter**, chargée depuis Google Fonts.
 
@@ -73,9 +76,9 @@ Les photos (`assets/img/`) proviennent d'[Unsplash](https://unsplash.com/license
 | `split-auto.jpg`, `split-service.jpg` | Les deux moitiés de l'accueil | portrait ou carré ~1600px |
 | `hero.jpg` | Hero de la page Auto | paysage ~1920px |
 | `srv-hero.jpg` | Hero de la page Service | paysage ~1920px |
-| `service-auto.jpg`, `auto-int.jpg`, `g5.jpg` | Cartes de prestation Auto | paysage 4:3 ~1400px |
+| `fx-int-basic.jpg`, `fx-int-royal.jpg`, `fx-ext.jpg`, `fx-abo.jpg` | Cartes tarifaires Auto | paysage 16:10 ~1400px |
 | `srv-vitres.jpg`, `srv-bureaux.jpg`, `srv-cuisine.jpg`, `service-ext.jpg`, `s4.jpg`, `s1.jpg` | Cartes de prestation Service | paysage 4:3 ~1400px |
-| `g1`–`g7.jpg` | Galerie Auto | paysage ~900px |
+| `v1`–`v6.jpg` | Galerie Auto | paysage ~1100px |
 | `s1`–`s5.jpg` | Galerie Service | paysage ~900px |
 | `cta.jpg` | Bandeau d'appel | paysage ~1600px |
 
