@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08080a">
+  <meta name="color-scheme" content="dark">
+  <title>BLV Wash Service — Nettoyage de locaux professionnels</title>
+  <meta name="description" content="BLV Wash Service entretient vos locaux : vitrerie, bureaux et communs, cuisines et salles de restaurant, façades et extérieurs, fin de chantier. Interventions en dehors de vos heures d'ouverture.">
+  <meta property="og:title" content="BLV Wash Service — Nettoyage de locaux professionnels">
+  <meta property="og:description" content="Vitrerie, bureaux, restauration, extérieurs. Nous intervenons quand vous êtes fermés.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/srv-hero.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 6C21 22 14 32 14 41a18 18 0 0 0 36 0c0-9-7-19-18-35z' fill='%234b8dff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+  <!-- ===== Header ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo" aria-label="BLV WASH — accueil">
+        <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C21 22 14 32 14 41a18 18 0 0 0 36 0c0-9-7-19-18-35z" fill="var(--accent)"/></svg>
+        <span>
+          <span class="logo__text">BLV <em>WASH</em></span>
+          <span class="logo__branch">SERVICE</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <a href="#prestations" class="nav__link" data-num="01">Prestations</a>
+        <a href="#secteurs"    class="nav__link" data-num="02">Secteurs</a>
+        <a href="#protocole"   class="nav__link" data-num="03">Protocole</a>
+        <a href="#galerie"     class="nav__link" data-num="04">Réalisations</a>
+        <a href="#contact"     class="nav__link" data-num="05">Contact</a>
+        <a href="auto.html"    class="nav__link" data-num="06">BLV Wash Auto</a>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+33612345678" class="header__phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+          <span>06 12 34 56 78</span>
+        </a>
+        <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="accueil">
+      <div class="hero__media" aria-hidden="true">
+        <img src="assets/img/srv-hero.jpg" alt="" id="hero-img" fetchpriority="high">
+      </div>
+
+      <div class="hero__inner">
+        <div class="hero__content">
+          <span class="label label--accent reveal">BLV Wash Service</span>
+          <h1 class="reveal delay-1">Vos locaux, impeccables à l'ouverture.</h1>
+          <p class="hero__lead reveal delay-2">
+            Vitrerie, bureaux, cuisines, extérieurs. Nous passons quand vous êtes fermés,
+            pour que vos clients ne voient que le résultat.
+          </p>
+          <div class="hero__actions reveal delay-3">
+            <a href="tel:+33612345678" class="btn btn--primary">Appeler maintenant</a>
+            <a href="#prestations" class="btn btn--outline">
+              Voir les prestations
+              <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="scrollcue" aria-hidden="true">
+        <span>Défiler</span>
+        <span class="scrollcue__line"></span>
+      </div>
+    </section>
+
+    <!-- ===== Intention ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="statement reveal">
+          <span class="label">Ce que voient vos clients</span>
+          <p>
+            <strong>La propreté ne se remarque que quand elle manque.</strong>
+            <span class="muted">Une vitrine marquée, un sol terne, une salle qui sent le renfermé :
+            personne n'en parle, tout le monde le retient. Notre travail est
+            d'être invisible et que le vôtre paraisse mieux.</span>
+          </p>
+        </div>
+
+        <div class="pillars">
+          <article class="pillar reveal">
+            <span class="pillar__num">01</span>
+            <h3>En dehors de vos heures</h3>
+            <p>Tôt le matin, tard le soir, le dimanche. Nous nous calons sur votre activité, jamais l'inverse.</p>
+          </article>
+          <article class="pillar reveal delay-1">
+            <span class="pillar__num">02</span>
+            <h3>Un seul interlocuteur</h3>
+            <p>Le même intervenant d'une fois sur l'autre. Il connaît vos locaux, vos accès et vos habitudes.</p>
+          </article>
+          <article class="pillar reveal delay-2">
+            <span class="pillar__num">03</span>
+            <h3>Ponctuel ou régulier</h3>
+            <p>Une remise en état après travaux, ou un passage chaque semaine. Sans engagement de longue durée.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Prestations ===== -->
+    <section class="section section--alt" id="prestations">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="label">Prestations</span>
+          <h2>Tout ce qui se voit, et tout ce qui se sent.</h2>
+          <p>Le devis se construit après une visite rapide de vos locaux. Les prix se donnent au téléphone.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card reveal">
+            <div class="card__media">
+              <span class="card__num">01</span>
+              <img src="assets/img/srv-vitres.jpg" alt="Vitrine de commerce nettoyée" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3>Vitrerie</h3>
+              <ul class="card__list">
+                <li>Vitrines et devantures de commerce</li>
+                <li>Baies vitrées et cloisons intérieures</li>
+                <li>Encadrements, rails et appuis de fenêtre</li>
+                <li>Passage régulier ou à la demande</li>
+              </ul>
+              <a href="#contact" class="card__link">
+                Demander le prix
+                <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card reveal delay-1">
+            <div class="card__media">
+              <span class="card__num">02</span>
+              <img src="assets/img/srv-bureaux.jpg" alt="Bureaux modernes après entretien" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3>Bureaux &amp; parties communes</h3>
+              <ul class="card__list">
+                <li>Postes de travail, salles de réunion</li>
+                <li>Sanitaires et points d'eau</li>
+                <li>Halls, couloirs, escaliers, ascenseurs</li>
+                <li>Sols : aspiration, lavage, remise en brillance</li>
+              </ul>
+              <a href="#contact" class="card__link">
+                Demander le prix
+                <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card reveal delay-2">
+            <div class="card__media">
+              <span class="card__num">03</span>
+              <img src="assets/img/srv-cuisine.jpg" alt="Cuisine professionnelle en service" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3>Restauration</h3>
+              <ul class="card__list">
+                <li>Salles, banquettes, mobilier</li>
+                <li>Cuisines professionnelles et plans de travail</li>
+                <li>Dégraissage des hottes et des crédences</li>
+                <li>Sols antidérapants et siphons</li>
+              </ul>
+              <a href="#contact" class="card__link">
+                Demander le prix
+                <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card reveal delay-3">
+            <div class="card__media">
+              <span class="card__num">04</span>
+              <img src="assets/img/service-ext.jpg" alt="Nettoyage haute pression d'un sol extérieur" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3>Extérieurs</h3>
+              <ul class="card__list">
+                <li>Terrasses bois, pierre et carrelage</li>
+                <li>Façades, murs et bardages</li>
+                <li>Parkings, allées et pavés</li>
+                <li>Démoussage et traitement hydrofuge</li>
+              </ul>
+              <a href="#contact" class="card__link">
+                Demander le prix
+                <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card reveal delay-4">
+            <div class="card__media">
+              <span class="card__num">05</span>
+              <img src="assets/img/s4.jpg" alt="Immeuble de bureaux vitré" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3>Fin de chantier</h3>
+              <ul class="card__list">
+                <li>Dépoussiérage complet après travaux</li>
+                <li>Retrait des traces de peinture et d'enduit</li>
+                <li>Vitrages, menuiseries, radiateurs</li>
+                <li>Remise en état avant livraison</li>
+              </ul>
+              <a href="#contact" class="card__link">
+                Demander le prix
+                <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card reveal delay-4">
+            <div class="card__media">
+              <span class="card__num">06</span>
+              <img src="assets/img/s1.jpg" alt="Désinfection d'une surface de travail" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3>Désinfection</h3>
+              <ul class="card__list">
+                <li>Points de contact : poignées, interrupteurs, rampes</li>
+                <li>Sanitaires et vestiaires</li>
+                <li>Produits virucides normés</li>
+                <li>Intervention ponctuelle ou récurrente</li>
+              </ul>
+              <a href="#contact" class="card__link">
+                Demander le prix
+                <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Secteurs ===== -->
+    <section class="section" id="secteurs">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="label">Secteurs</span>
+          <h2>Chaque métier a ses contraintes.</h2>
+          <p>Un restaurant ne se nettoie pas comme un plateau de bureaux. Nous adaptons le protocole, les produits et les horaires.</p>
+        </div>
+
+        <div class="sectors reveal">
+          <article class="sector">
+            <span class="sector__num">01</span>
+            <div>
+              <h3>Restauration</h3>
+              <p>Salles, cuisines, hottes. Entre deux services ou après fermeture, avec des produits agréés contact alimentaire.</p>
+            </div>
+            <span class="sector__mark" aria-hidden="true">→</span>
+          </article>
+          <article class="sector">
+            <span class="sector__num">02</span>
+            <div>
+              <h3>Commerces &amp; boutiques</h3>
+              <p>Vitrines, sols, cabines d'essayage. Passage avant l'ouverture, jamais devant vos clients.</p>
+            </div>
+            <span class="sector__mark" aria-hidden="true">→</span>
+          </article>
+          <article class="sector">
+            <span class="sector__num">03</span>
+            <div>
+              <h3>Bureaux &amp; cabinets</h3>
+              <p>Open spaces, salles de réunion, sanitaires. Entretien régulier, tôt le matin ou en soirée.</p>
+            </div>
+            <span class="sector__mark" aria-hidden="true">→</span>
+          </article>
+          <article class="sector">
+            <span class="sector__num">04</span>
+            <div>
+              <h3>Résidences &amp; copropriétés</h3>
+              <p>Halls, escaliers, locaux poubelles, parkings. Prestation cadrée avec le syndic.</p>
+            </div>
+            <span class="sector__mark" aria-hidden="true">→</span>
+          </article>
+          <article class="sector">
+            <span class="sector__num">05</span>
+            <div>
+              <h3>Chantiers &amp; livraisons</h3>
+              <p>Remise en état complète avant la remise des clés ou l'ouverture au public.</p>
+            </div>
+            <span class="sector__mark" aria-hidden="true">→</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Protocole ===== -->
+    <section class="section section--alt" id="protocole">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="label">Protocole</span>
+          <h2>Un cadre clair, du premier appel au contrôle.</h2>
+          <p>Vous savez ce qui est fait, quand, et par qui.</p>
+        </div>
+
+        <div class="drag reveal" data-drag>
+          <div class="drag__viewport">
+            <div class="drag__track">
+              <article class="stepcard">
+                <span class="stepcard__num">01</span>
+                <h3>Visite des locaux</h3>
+                <p>Nous passons voir la surface, les accès et les contraintes. Gratuit et sans engagement.</p>
+              </article>
+              <article class="stepcard">
+                <span class="stepcard__num">02</span>
+                <h3>Cahier des charges</h3>
+                <p>Ce qui est fait à chaque passage, ce qui revient chaque mois. Écrit noir sur blanc, avec le prix.</p>
+              </article>
+              <article class="stepcard">
+                <span class="stepcard__num">03</span>
+                <h3>Planning</h3>
+                <p>On cale les créneaux sur vos horaires d'ouverture. Vous recevez le planning du mois à l'avance.</p>
+              </article>
+              <article class="stepcard">
+                <span class="stepcard__num">04</span>
+                <h3>Intervention</h3>
+                <p>Même intervenant, même matériel, même ordre des tâches. Les consommables sont fournis.</p>
+              </article>
+              <article class="stepcard">
+                <span class="stepcard__num">05</span>
+                <h3>Traçabilité</h3>
+                <p>Une fiche de passage remplie à chaque intervention. Vous savez exactement ce qui a été fait.</p>
+              </article>
+              <article class="stepcard">
+                <span class="stepcard__num">06</span>
+                <h3>Point régulier</h3>
+                <p>On fait le tour ensemble tous les trimestres pour ajuster ce qui doit l'être.</p>
+              </article>
+            </div>
+          </div>
+          <div class="drag__hint">
+            <span aria-hidden="true">←</span>
+            <span>Faites glisser</span>
+            <span class="drag__bar" aria-hidden="true"><span></span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Réalisations ===== -->
+    <section class="section" id="galerie">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="label">Réalisations</span>
+          <h2>Des locaux qu'on remarque, pour la bonne raison.</h2>
+        </div>
+
+        <div class="drag reveal" data-drag>
+          <div class="drag__viewport">
+            <div class="drag__track">
+              <figure class="shot"><img src="assets/img/srv-hero.jpg" alt="Nettoyage des sols d'une surface commerciale après fermeture" loading="lazy"><figcaption>Passage après fermeture</figcaption></figure>
+              <figure class="shot"><img src="assets/img/s3.jpg" alt="Nettoyage d'une fenêtre intérieure" loading="lazy"><figcaption>Vitrerie intérieure</figcaption></figure>
+              <figure class="shot"><img src="assets/img/split-service.jpg" alt="Entretien des parties communes d'un établissement" loading="lazy"><figcaption>Parties communes</figcaption></figure>
+              <figure class="shot"><img src="assets/img/s5.jpg" alt="Cuisine professionnelle après dégraissage" loading="lazy"><figcaption>Cuisine professionnelle</figcaption></figure>
+              <figure class="shot"><img src="assets/img/s2.jpg" alt="Désinfection d'un plan de travail" loading="lazy"><figcaption>Désinfection des surfaces</figcaption></figure>
+              <figure class="shot"><img src="assets/img/g4.jpg" alt="Nettoyage haute pression d'un escalier extérieur" loading="lazy"><figcaption>Extérieurs haute pression</figcaption></figure>
+            </div>
+          </div>
+          <div class="drag__hint">
+            <span aria-hidden="true">←</span>
+            <span>Faites glisser</span>
+            <span class="drag__bar" aria-hidden="true"><span></span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Passerelle vers l'autre branche ===== -->
+    <section class="section section--tight">
+      <div class="container">
+        <a class="crossover reveal" href="auto.html">
+          <div class="crossover__media" aria-hidden="true">
+            <img src="assets/img/split-auto.jpg" alt="" loading="lazy">
+          </div>
+          <div class="crossover__body">
+            <div>
+              <span class="label label--accent">Autre activité</span>
+              <h3>BLV Wash Auto</h3>
+              <p>Nous lavons aussi les véhicules, à la main et à domicile. Particuliers comme flottes d'entreprise.</p>
+            </div>
+            <span class="crossover__go">
+              Découvrir
+              <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== Appel ===== -->
+    <section class="cta">
+      <div class="cta__media" aria-hidden="true">
+        <img src="assets/img/s4.jpg" alt="" loading="lazy">
+      </div>
+      <div class="container cta__inner reveal">
+        <span class="label label--plain label--accent">Parlons de vos locaux</span>
+        <h2>La visite est gratuite, le devis aussi.</h2>
+        <p>Un appel, un passage sur place, et vous avez un prix ferme.</p>
+        <div class="cta__actions">
+          <a href="tel:+33612345678" class="btn btn--light">06 12 34 56 78</a>
+          <a href="#contact" class="btn btn--outline">Écrire un message</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section section--alt" id="contact">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="label">Contact</span>
+          <h2>Parlons de vos locaux.</h2>
+        </div>
+
+        <div class="contact">
+          <div class="contact__list reveal-left">
+            <div class="contact__item">
+              <span class="contact__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg></span>
+              <div><strong>Téléphone</strong><a href="tel:+33612345678">06 12 34 56 78</a></div>
+            </div>
+            <div class="contact__item">
+              <span class="contact__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6.5L21 6"/></svg></span>
+              <div><strong>Email</strong><a href="mailto:contact@blvwash.fr">contact@blvwash.fr</a></div>
+            </div>
+            <div class="contact__item">
+              <span class="contact__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10.5c0 5.5-8 11-8 11s-8-5.5-8-11a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10.5" r="3"/></svg></span>
+              <div><strong>Secteur</strong><span>Votre ville et ses alentours</span></div>
+            </div>
+          </div>
+
+          <form class="form reveal-right" id="contact-form" data-branch="BLV Wash Service" novalidate>
+            <div class="form__row">
+              <div class="form__group">
+                <label for="f-name">Nom et société *</label>
+                <input type="text" id="f-name" name="name" required autocomplete="organization" placeholder="Jean Dupont — Restaurant Le Central">
+              </div>
+              <div class="form__group">
+                <label for="f-phone">Téléphone *</label>
+                <input type="tel" id="f-phone" name="phone" required autocomplete="tel" placeholder="06 12 34 56 78">
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="form__group">
+                <label for="f-email">Email</label>
+                <input type="email" id="f-email" name="email" autocomplete="email" placeholder="contact@societe.fr">
+              </div>
+              <div class="form__group">
+                <label for="f-service">Prestation *</label>
+                <select id="f-service" name="service" required>
+                  <option value="" disabled selected>Choisir…</option>
+                  <option>Vitrerie</option>
+                  <option>Bureaux &amp; parties communes</option>
+                  <option>Restauration</option>
+                  <option>Extérieurs</option>
+                  <option>Fin de chantier</option>
+                  <option>Désinfection</option>
+                  <option>Plusieurs prestations</option>
+                </select>
+              </div>
+            </div>
+            <div class="form__group">
+              <label for="f-msg">Votre besoin *</label>
+              <textarea id="f-msg" name="message" rows="5" required placeholder="Type de local, surface approximative, fréquence souhaitée, horaires possibles…"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--block">Envoyer</button>
+            <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+            <p class="form__legal">Vos données ne sont jamais partagées.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="logo logo--footer">
+          <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C21 22 14 32 14 41a18 18 0 0 0 36 0c0-9-7-19-18-35z" fill="var(--accent)"/></svg>
+          <span class="logo__text">BLV <em>WASH</em></span>
+        </a>
+        <p>Lavage automobile à domicile et entretien de locaux professionnels.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8h2.5V4.5H14A3.5 3.5 0 0 0 10.5 8v2.5H8V14h2.5v6H14v-6h2.5l.5-3.5h-3V8.5A.5.5 0 0 1 14 8z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4v9.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 6.5c.8 1.6 2.3 2.8 4.5 3"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>BLV Wash Service</h4>
+        <a href="#prestations">Prestations</a>
+        <a href="#secteurs">Secteurs</a>
+        <a href="#protocole">Protocole</a>
+        <a href="#galerie">Réalisations</a>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <a href="tel:+33612345678">06 12 34 56 78</a>
+        <a href="mailto:contact@blvwash.fr">contact@blvwash.fr</a>
+        <a href="auto.html">BLV Wash Auto</a>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© BLV WASH — Tous droits réservés.</p>
+      <p><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a></p>
+    </div>
+  </footer>
+
+  <a href="#accueil" class="backtop" id="backtop" aria-label="Retour en haut">↑</a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
