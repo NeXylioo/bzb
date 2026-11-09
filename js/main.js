@@ -245,60 +245,163 @@
   });
 
   /* ----------------------------------------------------------------------
-     Réservation en ligne (Cal.com)
-     Le bloc #booking porte data-cal-link="votre-pseudo" (page de profil qui
-     liste toutes les formules) ou "votre-pseudo/une-formule". Tant qu'il est
-     vide, le message d'attente reste affiché et rien n'est chargé.
+     Réservation en ligne
+     1. Le client compose son lavage : total, durée et acompte se calculent
+        à partir des data-price / data-min posés sur chaque choix (auto.html).
+     2. « Choisir mon créneau » ouvre le calendrier Cal.com, avec la durée
+        calculée et le récapitulatif recopié dans les notes du rendez-vous.
+        Tant que data-cal-link est vide, le récapitulatif est recopié dans le
+        formulaire de contact à la place.
      ---------------------------------------------------------------------- */
-  const booking = $("#booking");
-  const calLink = booking && (booking.dataset.calLink || "").trim();
+  const booker = $("#booker");
 
-  if (booking && calLink) {
-    const origin = booking.dataset.calOrigin || "https://cal.com";
-    const embedSrc = origin.replace("://cal.com", "://app.cal.com") + "/embed/embed.js";
+  if (booker) {
+    const form     = $("#booker-form");
+    const deposit  = Number(booker.dataset.deposit || 20);
+    const unitBox  = $("#bk-unit");
+    const aboBox   = $("#bk-abo");
+    const extras   = $("#bk-extras");
+    const goBtn    = $("#bk-go");
+    const slot     = $("#bk-slot");
+    const booking  = $("#booking");
+    const calLink  = (booking.dataset.calLink || "").trim();
+    const euros    = (n) => n.toLocaleString("fr-FR") + " €";
+    const duree    = (min) => {
+      const h = Math.floor(min / 60), m = min % 60;
+      return h ? h + " h" + (m ? " " + String(m).padStart(2, "0") : "") : m + " min";
+    };
 
-    // Chargeur officiel Cal.com : met les appels en file le temps que le script arrive.
-    (function (C, A, L) {
-      const p = (a, ar) => { a.q.push(ar); };
-      const d = C.document;
-      C.Cal = C.Cal || function () {
-        const cal = C.Cal;
-        const ar = arguments;
-        if (!cal.loaded) {
-          cal.ns = {};
-          cal.q = cal.q || [];
-          d.head.appendChild(d.createElement("script")).src = A;
-          cal.loaded = true;
-        }
-        if (ar[0] === L) {
-          const api = function () { p(api, arguments); };
-          const namespace = ar[1];
-          api.q = api.q || [];
-          if (typeof namespace === "string") {
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ["initNamespace", namespace]);
-          } else p(cal, ar);
-          return;
-        }
-        p(cal, ar);
+    // Lit les choix et renvoie le panier.
+    const panier = () => {
+      const mode = form.elements.mode.value;
+      if (mode === "abo") {
+        return {
+          mode,
+          lignes: [["Abonnement — premier passage Royal intérieur + extérieur", 100]],
+          total: 100,
+          minutes: 240,
+          suite: "puis 85 € / mois, engagement six mois",
+        };
+      }
+      const choisis = $$("input[data-price]:checked", unitBox);
+      return {
+        mode,
+        lignes: choisis.map((i) => [i.dataset.label, Number(i.dataset.price)]),
+        total: choisis.reduce((t, i) => t + Number(i.dataset.price), 0),
+        minutes: choisis.reduce((t, i) => t + Number(i.dataset.min), 0),
       };
-    })(window, embedSrc, "init");
+    };
 
-    booking.innerHTML = "";
-    booking.classList.add("is-live");
+    const recap = (p) =>
+      p.lignes.map(([l, prix]) => "- " + l + " : " + euros(prix)).join("\n") +
+      "\nTotal : " + euros(p.total) + (p.suite ? " (" + p.suite + ")" : "") +
+      "\nDurée estimée : " + duree(p.minutes) +
+      "\nAcompte : " + euros(deposit) + ", reste sur place : " + euros(Math.max(p.total - deposit, 0));
 
-    window.Cal("init", { origin: origin });
-    window.Cal("inline", {
-      elementOrSelector: "#booking",
-      calLink: calLink,
-      layout: "month_view",
+    const render = () => {
+      const mode = form.elements.mode.value;
+      unitBox.hidden = mode === "abo";
+      aboBox.hidden  = mode !== "abo";
+
+      // Les options carrosserie n'ont de sens qu'avec l'extérieur.
+      const avecExt = form.elements.ext.value !== "";
+      extras.classList.toggle("is-off", !avecExt);
+      $("#bk-extras-hint").hidden = avecExt;
+      $$("input", extras).forEach((i) => {
+        i.disabled = !avecExt;
+        if (!avecExt) i.checked = false;
+      });
+
+      const p = panier();
+      const vide = p.lignes.length === 0;
+      $("#bk-lines").innerHTML = vide
+        ? '<li class="bsum__empty">Choisissez au moins une prestation.</li>'
+        : p.lignes.map(([l, prix]) => "<li><span>" + l + "</span><span>" + euros(prix) + "</span></li>").join("") +
+          (p.suite ? "<li><span>" + p.suite + "</span><span></span></li>" : "");
+      $("#bk-total").textContent   = euros(p.total);
+      $("#bk-time").textContent    = vide ? "—" : duree(p.minutes);
+      $("#bk-deposit").textContent = euros(deposit);
+      $("#bk-rest").textContent    = vide ? "—" : euros(Math.max(p.total - deposit, 0));
+      goBtn.disabled = vide;
+
+      // Choix modifié après coup : on referme le calendrier pour ne pas
+      // réserver un créneau d'une durée qui ne correspond plus.
+      if (!slot.hidden && calLink) slot.hidden = true;
+    };
+
+    form.addEventListener("change", render);
+    render();
+
+    // Chargeur officiel Cal.com (appels mis en file le temps que le script arrive).
+    const chargerCal = (origin) => {
+      if (window.Cal) return;
+      (function (C, A, L) {
+        const p = (a, ar) => { a.q.push(ar); };
+        const d = C.document;
+        C.Cal = C.Cal || function () {
+          const cal = C.Cal;
+          const ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, origin.replace("://cal.com", "://app.cal.com") + "/embed/embed.js", "init");
+    };
+
+    let ouverture = 0;
+    goBtn.addEventListener("click", () => {
+      const p = panier();
+      if (!p.lignes.length) return;
+      slot.hidden = false;
+
+      if (calLink) {
+        const origin = booking.dataset.calOrigin || "https://cal.com";
+        chargerCal(origin);
+        // Un espace de noms neuf à chaque ouverture : le calendrier repart
+        // proprement avec la nouvelle durée et le nouveau récapitulatif.
+        const ns = "bk" + ++ouverture;
+        booking.innerHTML = "";
+        booking.classList.add("is-live");
+        window.Cal("init", ns, { origin: origin });
+        window.Cal.ns[ns]("inline", {
+          elementOrSelector: "#booking",
+          calLink: calLink,
+          layout: "month_view",
+          config: { duration: String(p.minutes), notes: recap(p) },
+        });
+        window.Cal.ns[ns]("ui", {
+          theme: "dark",
+          styles: { branding: { brandColor: "#d4a24c" } },
+          layout: "month_view",
+        });
+      } else {
+        // Pas encore de calendrier : on prépare la demande dans le formulaire.
+        const msg = $("#f-msg");
+        const srv = $("#f-service");
+        if (msg) msg.value = "Ma sélection :\n" + recap(p) + "\n\nAdresse du lavage : \nModèle du véhicule : \nMes disponibilités : ";
+        if (srv) srv.value = p.mode === "abo" ? "Abonnement" : "Lavage à l'unité";
+      }
+      slot.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
     });
-    window.Cal("ui", {
-      theme: "dark",
-      styles: { branding: { brandColor: "#d4a24c" } },
-      hideEventTypeDetails: false,
-      layout: "month_view",
+
+    $("#bk-back").addEventListener("click", () => {
+      slot.hidden = true;
+      booker.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
     });
   }
 

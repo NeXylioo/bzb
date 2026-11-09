@@ -26,20 +26,19 @@ L'accueil ne fait qu'une chose : proposer le choix entre les deux activités. De
 
 ### Les pages d'activité
 
-Les deux pages suivent le même squelette :
+**Page Auto** : volontairement courte, tout mène à la réservation.
 
-| Section | Auto | Service |
-|---|---|---|
-| Hero | ✓ | ✓ |
-| Trois arguments numérotés | ✓ | ✓ |
-| Prestations | Cartes tarifaires, **prix affichés** | Cartes photo, prix sur demande |
-| Secteurs | — | Liste éditoriale numérotée |
-| Protocole | Piste horizontale qui se glisse à la souris | idem |
-| Réalisations | Galerie dans la même piste | idem |
-| Passerelle vers l'autre activité | ✓ | ✓ |
-| Appel + Contact | ✓ | ✓ |
+| Section | Contenu |
+|---|---|
+| Hero | Bouton « Réserver un créneau » |
+| Réservation | Le client compose son lavage (prix et durée calculés en direct), puis choisit son créneau et paie l'acompte |
+| Réalisations | Galerie qui se glisse à la souris |
+| Passerelle | Lien vers BLV Wash Service |
+| Contact | Formulaire, email, secteur (pas de téléphone) |
 
-Les tarifs ne figurent que sur la page Auto : ils se règlent dans le bloc `.tariffs` d'`auto.html`. Côté Service, le prix dépend des locaux et se donne au téléphone.
+Les prestations et leurs prix n'apparaissent **qu'au moment de réserver**, dans la section `#reservation` d'`auto.html`. Chaque choix porte son prix et sa durée : `data-price="95"` (en euros) et `data-min="180"` (en minutes). Modifier ces deux attributs suffit, le total, la durée et le reste à payer se recalculent tout seuls. L'abonnement (100 € le premier passage, 4 h) se règle dans `js/main.js`, fonction `panier`.
+
+**Page Service** : hero, arguments, prestations (prix sur demande), secteurs, protocole, réalisations, appel et contact. Le téléphone n'apparaît que sur cette page.
 
 ## À personnaliser en priorité
 
@@ -77,7 +76,7 @@ Les photos (`assets/img/`) proviennent d'[Unsplash](https://unsplash.com/license
 | `split-auto.jpg`, `split-service.jpg` | Les deux moitiés de l'accueil | portrait ou carré ~1600px |
 | `hero.jpg` | Hero de la page Auto | paysage ~1920px |
 | `srv-hero.jpg` | Hero de la page Service | paysage ~1920px |
-| `fx-int-basic.jpg`, `fx-int-royal.jpg`, `fx-ext.jpg`, `fx-abo.jpg` | Cartes tarifaires Auto | paysage 16:10 ~1400px |
+| `fx-int-basic.jpg`, `fx-int-royal.jpg`, `fx-ext.jpg`, `fx-abo.jpg` | Choix de prestation dans la réservation Auto | paysage 16:10 ~1400px |
 | `srv-vitres.jpg`, `srv-bureaux.jpg`, `srv-cuisine.jpg`, `service-ext.jpg`, `s4.jpg`, `s1.jpg` | Cartes de prestation Service | paysage 4:3 ~1400px |
 | `v1`–`v6.jpg` | Galerie Auto | paysage ~1100px |
 | `s1`–`s5.jpg` | Galerie Service | paysage ~900px |
@@ -100,15 +99,16 @@ La section **Réservation** d'`auto.html` intègre un calendrier [Cal.com](https
 1. **Créer le compte** sur [cal.com](https://cal.com) (offre gratuite suffisante), pseudo par exemple `blvwash`.
 2. **Relier l'agenda** : *Settings → Calendars* → Google Agenda ou Outlook. Les créneaux déjà pris disparaissent automatiquement, et chaque réservation y est inscrite.
 3. **Fixer les disponibilités** : *Availability* → jours et heures de travail.
-4. **Créer une formule par prestation** (*Event Types*) avec la bonne durée : Intérieur Basic (1 h 30), Intérieur Royal (3 h), Extérieur Royal (1 h), Intérieur + extérieur… Ajoutez un délai entre deux rendez-vous (*Limits → Buffer time*) pour le trajet, et dans *Advanced* une question obligatoire « Adresse du lavage » et « Modèle du véhicule ».
-5. **Brancher l'acompte** : *Apps → Stripe* → connecter (ou créer) un compte [Stripe](https://stripe.com). Puis, dans chaque formule, onglet *Apps → Stripe* : activez le paiement et mettez **20 €** (le montant de l'acompte, pas le prix total). Le rendez-vous n'est confirmé qu'une fois payé. L'argent arrive sur votre compte Stripe puis sur votre banque.
-6. **Activer sur le site** : dans `auto.html`, remplissez l'attribut du bloc :
+4. **Le type de rendez-vous** (*Event Types*) : ajoutez un délai entre deux rendez-vous (*Limits → Buffer time*) pour le trajet, et dans *Advanced* une question obligatoire « Adresse du lavage » et « Modèle du véhicule ».
+5. **Brancher l'acompte** : *Apps → Stripe* → connecter (ou créer) un compte [Stripe](https://stripe.com). Puis, dans le type de rendez-vous, onglet *Apps → Stripe* : activez le paiement et mettez **20 €** (le montant de l'acompte, pas le prix total). Le rendez-vous n'est confirmé qu'une fois payé. L'argent arrive sur votre compte Stripe puis sur votre banque.
+6. **Une seule formule suffit** : comme le client compose son lavage sur le site, créez dans Cal.com **un seul** type de rendez-vous, par exemple « Lavage » (`blvwash/lavage`), et cochez dans *Duration → Allow multiple durations* toutes les durées possibles : 1 h, 1 h 30, 2 h, 2 h 30, 3 h, 3 h 30, 4 h, 4 h 30, 5 h. Le site ouvre automatiquement le calendrier sur la bonne durée, et recopie le détail de la commande (prestations, total, reste à payer) dans les notes du rendez-vous.
+7. **Activer sur le site** : dans `auto.html`, remplissez l'attribut du bloc :
 
    ```html
-   <div class="booking reveal" id="booking" data-cal-link="blvwash" ...>
+   <div class="booking" id="booking" data-cal-link="blvwash/lavage" ...>
    ```
 
-   `blvwash` affiche toutes les formules ; `blvwash/interieur-royal` ouvre directement une formule.
+   Tant que l'attribut est vide, le bouton « Choisir mon créneau » recopie la sélection dans le formulaire de contact.
 
 Le montant de l'acompte et les conditions d'annulation affichés sur le site (20 €, gratuit jusqu'à 48 h avant) se modifient dans la section `#reservation` d'`auto.html` : gardez-les alignés avec Cal.com.
 
