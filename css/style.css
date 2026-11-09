@@ -1048,40 +1048,127 @@ h1, h2, h3, h4 {
 .bmode input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .booker [hidden] { display: none !important; }
-.bpanel { display: flex; flex-direction: column; gap: 1.8rem; }
-.bgroup { border: 0; min-width: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-.bgroup legend {
-  font-size: 0.72rem;
+.bpanel { display: flex; flex-direction: column; gap: 1.2rem; }
+
+/* Un bloc par véhicule */
+.bcars { display: flex; flex-direction: column; gap: 1.2rem; }
+.bcar {
+  border: 1px solid var(--border);
+  background: var(--ink-900);
+  padding: 1.3rem 1.3rem 1.4rem;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+.bcar.is-new { animation: bcar-in 0.5s var(--ease); }
+@keyframes bcar-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.bcar__head { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.bcar__title { font-size: 1.05rem; font-weight: 700; margin-right: auto; }
+.bcar__remove { background: none; border: 0; color: var(--text-dim); font: inherit; font-size: 0.8rem; cursor: pointer; }
+.bcar__remove:hover { color: var(--accent); text-decoration: underline; }
+
+/* Type de véhicule */
+.btype { display: inline-flex; border: 1px solid var(--border); }
+.btype label { cursor: pointer; position: relative; }
+.btype input { position: absolute; opacity: 0; pointer-events: none; }
+.btype span { display: block; padding: 0.5rem 0.95rem; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); transition: background 0.25s, color 0.25s; }
+.btype small { font-weight: 500; opacity: 0.75; }
+.btype input:checked + span { background: var(--accent); color: var(--on-accent); }
+.btype input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.bgroup { display: flex; flex-direction: column; gap: 0.5rem; transition: opacity 0.3s; }
+.bgroup__title {
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.2rem;
 }
+.bgroup__title small { letter-spacing: 0.04em; text-transform: none; font-weight: 500; color: var(--text-dim); margin-left: 0.4rem; }
+.bgroup.is-off { opacity: 0.35; }
+.bgroup.is-off .brow { pointer-events: none; }
 
 /* Une ligne par prestation */
 .brow {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.85rem 1.1rem;
+  padding: 0.8rem 1.05rem;
   border: 1px solid var(--border);
   background: var(--ink-850);
   cursor: pointer;
-  transition: border-color 0.25s, background 0.25s, opacity 0.25s;
+  user-select: none;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s var(--ease), box-shadow 0.25s;
 }
-.brow:hover { border-color: rgba(212, 162, 76, 0.35); }
-.brow:has(input:checked) { border-color: var(--accent); background: var(--ink-800); }
+.brow:hover { border-color: rgba(212, 162, 76, 0.45); transform: translateX(4px); }
+.brow:active { transform: scale(0.985); }
+.brow:has(input:checked) {
+  border-color: var(--accent);
+  background: linear-gradient(90deg, rgba(212, 162, 76, 0.12), var(--ink-800) 60%);
+  box-shadow: 0 0 0 1px var(--accent), 0 10px 30px -18px rgba(212, 162, 76, 0.7);
+}
+.brow:has(input[value=""]:checked) { background: var(--ink-800); box-shadow: none; border-color: rgba(212, 162, 76, 0.5); }
 .brow input { width: 1.05rem; height: 1.05rem; accent-color: var(--accent); flex: none; margin: 0; }
-.brow__name { flex: 1; display: flex; flex-direction: column; font-weight: 600; font-size: 0.97rem; min-width: 0; }
-.brow__name small { font-weight: 400; font-size: 0.8rem; color: var(--text-dim); margin-top: 0.15rem; }
-.brow__time { font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
-.brow__price { font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 3.6rem; text-align: right; }
-.brow.is-off { opacity: 0.35; pointer-events: none; }
+.brow__name { flex: 1; display: flex; flex-direction: column; font-weight: 600; font-size: 0.95rem; min-width: 0; }
+.brow__name small { font-weight: 400; font-size: 0.78rem; color: var(--text-dim); margin-top: 0.15rem; }
+.brow__time { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; }
+.brow__price { font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 3.4rem; text-align: right; transition: transform 0.3s var(--ease); }
+.brow:hover .brow__price,
+.brow:has(input:checked) .brow__price { transform: scale(1.08); }
 
-.bnote { padding: 1.1rem 1.2rem; border: 1px solid var(--border); background: var(--ink-850); color: var(--text-muted); font-size: 0.94rem; }
-.bnote strong { color: var(--text); }
-.bcount { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.85rem 1.1rem; border: 1px solid var(--border); background: var(--ink-850); font-weight: 600; font-size: 0.95rem; }
+/* Effets au clic */
+.is-pop { animation: bpop 0.45s var(--ease); }
+@keyframes bpop { 0% { transform: scale(1); } 35% { transform: scale(1.025); } 100% { transform: scale(1); } }
+.brow.is-pop input { animation: bcheck 0.45s var(--ease); }
+@keyframes bcheck { 0% { transform: scale(0.6); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
+.bwave {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  background: rgba(212, 162, 76, 0.45);
+  pointer-events: none;
+  animation: bwave 0.6s ease-out forwards;
+}
+@keyframes bwave { to { transform: scale(40); opacity: 0; } }
+
+.baddcar {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem;
+  border: 1px dashed rgba(212, 162, 76, 0.5);
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+}
+.baddcar span { font-size: 1.2rem; line-height: 1; transition: transform 0.35s var(--ease); }
+.baddcar:hover { background: var(--accent-soft); border-color: var(--accent); }
+.baddcar:hover span { transform: rotate(90deg); }
+
+/* Abonnement / étudiant : l'essentiel en grand, les modalités en petit */
+.babo { border: 1px solid var(--accent); background: var(--ink-900); padding: 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
+.babo__price { font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 800; line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
+.babo__price small { font-size: 0.95rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0; }
+.babo__list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.babo__list li { position: relative; padding-left: 1.3rem; font-size: 1rem; font-weight: 600; }
+.babo__list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); }
+.babo__terms { font-size: 0.74rem; line-height: 1.55; color: var(--text-dim); border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+.bcount { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.8rem 1.05rem; border: 1px solid var(--border); background: var(--ink-850); font-weight: 600; font-size: 0.95rem; }
 .bcount select { background: var(--ink-700); color: var(--text); border: 1px solid var(--border); padding: 0.4rem 0.7rem; font: inherit; }
 
 /* Récapitulatif */
@@ -1097,12 +1184,29 @@ h1, h2, h3, h4 {
 .bsum__lines li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.3rem 0; font-size: 0.9rem; color: var(--text-muted); }
 .bsum__lines li span:last-child { color: var(--text); white-space: nowrap; }
 .bsum__empty { color: var(--text-dim) !important; }
+.bsum__car { font-size: 0.7rem !important; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent) !important; padding-top: 0.6rem !important; }
+.bsum__car:first-child { padding-top: 0 !important; }
+.bsum__suite, .bsum__suite span { font-size: 0.74rem !important; color: var(--text-dim) !important; }
+.bsum__total strong { display: inline-block; }
+.bsum__total strong.is-bump { animation: bbump 0.5s var(--ease); }
+@keyframes bbump { 0% { transform: scale(1); } 40% { transform: scale(1.18); color: var(--accent-light); } 100% { transform: scale(1); } }
 .bsum__row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.32rem 0; font-size: 0.9rem; color: var(--text-muted); }
 .bsum__total { font-size: 1rem; color: var(--text); }
 .bsum__total strong { font-size: 1.6rem; font-weight: 800; color: var(--accent); }
 .bsum__deposit strong { color: var(--text); }
 .booker__summary .btn { margin-top: 1.2rem; }
 .booker__summary .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.booker__summary .btn { position: relative; overflow: hidden; }
+.booker__summary .btn:not(:disabled)::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -60%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+  animation: bshine 2.8s ease-in-out infinite;
+}
+@keyframes bshine { 0%, 55% { left: -60%; } 100% { left: 130%; } }
 .bsum__note { margin-top: 0.9rem; font-size: 0.78rem; color: var(--text-dim); }
 
 /* Étape créneau */
@@ -1133,7 +1237,9 @@ h1, h2, h3, h4 {
   .booker__summary { position: static; }
 }
 @media (max-width: 620px) {
+  .bcar { padding: 1rem; }
   .brow { display: grid; grid-template-columns: auto 1fr auto; gap: 0.2rem 0.8rem; }
+  .brow:hover { transform: none; }
   .brow input { grid-row: 1 / span 2; align-self: center; }
   .brow__name { grid-column: 2; }
   .brow__price { grid-column: 3; grid-row: 1; min-width: 0; }
@@ -1141,4 +1247,9 @@ h1, h2, h3, h4 {
   .bmode { align-self: stretch; }
   .bmode label { flex: 1; text-align: center; }
   .bmode span { padding-inline: 0.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brow, .brow__price, .baddcar span { transition: none; }
+  .booker__summary .btn::after { display: none; }
 }

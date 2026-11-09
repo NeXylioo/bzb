@@ -103,42 +103,80 @@
               <label><input type="radio" name="mode" value="etu"><span>Étudiant</span></label>
             </div>
 
-            <!-- À l'unité : tarifs du flyer. data-price en euros, data-min en minutes. -->
+            <!-- À l'unité : un bloc par véhicule, cloné depuis le modèle plus bas. -->
             <div class="bpanel" id="bk-unit">
-              <fieldset class="bgroup">
-                <legend>Intérieur</legend>
-                <label class="brow"><input type="radio" name="int" value="" checked><span class="brow__name">Sans intérieur</span></label>
-                <label class="brow"><input type="radio" name="int" value="basic" data-label="Intérieur Basic Wash" data-price="70" data-min="90"><span class="brow__name">Basic Wash<small>Aspiration habitacle, tapis et sièges · plastiques et vitres intérieures</small></span><span class="brow__time">1 h – 1 h 30</span><span class="brow__price">70 €</span></label>
-                <label class="brow"><input type="radio" name="int" value="royal" data-label="Intérieur Royal Wash" data-price="90" data-min="180"><span class="brow__name">Royal Wash<small>Aspiration complète · vapeur · injecteur-extracteur · contours de portes et coffre · cuir et Alcantara · plastiques revitalisés</small></span><span class="brow__time">2 h – 3 h</span><span class="brow__price">90 €</span></label>
-              </fieldset>
-
-              <fieldset class="bgroup">
-                <legend>Extérieur</legend>
-                <label class="brow"><input type="radio" name="ext" value="" checked><span class="brow__name">Sans extérieur</span></label>
-                <label class="brow"><input type="radio" name="ext" value="royal" data-label="Extérieur Royal Wash" data-price="50" data-min="60"><span class="brow__name">Royal Wash<small>Décontaminant · canon à mousse et frottage main · haute pression · jantes · séchage main · vitres</small></span><span class="brow__time">1 h</span><span class="brow__price">50 €</span></label>
-              </fieldset>
-
-              <fieldset class="bgroup">
-                <legend>Options</legend>
-                <label class="brow" data-needs="ext"><input type="checkbox" name="opt" value="hydrofuge" data-label="Protection hydrofuge" data-price="50" data-min="30"><span class="brow__name">Protection hydrofuge<small>Avec l'extérieur</small></span><span class="brow__price">+ 50 €</span></label>
-                <label class="brow" data-needs="ext"><input type="checkbox" name="opt" value="lustrage" data-label="Lustrage de la carrosserie" data-price="50" data-min="30"><span class="brow__name">Lustrage de la carrosserie<small>Avec l'extérieur</small></span><span class="brow__price">+ 50 €</span></label>
-                <label class="brow" data-needs="int"><input type="checkbox" name="opt" value="suv" data-label="Supplément SUV" data-price="25" data-min="0"><span class="brow__name">Mon véhicule est un SUV<small>Avec l'intérieur</small></span><span class="brow__price">+ 25 €</span></label>
-              </fieldset>
+              <div class="bcars" id="bk-cars"></div>
+              <button type="button" class="baddcar" id="bk-addcar">
+                <span aria-hidden="true">+</span> Ajouter un véhicule
+              </button>
             </div>
 
             <div class="bpanel" id="bk-abo" hidden>
-              <p class="bnote"><strong>90 € / mois</strong>, engagement six mois. Chaque mois : un Basic intérieur et un Royal extérieur. Sur les six mois : 3 lustrages extérieurs et 1 protection hydrofuge. Vous réservez ici le premier passage.</p>
+              <div class="babo">
+                <div class="babo__price">90 €<small> / mois</small></div>
+                <ul class="babo__list">
+                  <li>1 nettoyage Basic intérieur et Royal extérieur chaque mois</li>
+                  <li>3 lustrages extérieurs</li>
+                  <li>1 protection hydrofuge</li>
+                </ul>
+                <p class="babo__terms">
+                  Engagement sur six mois. Les lustrages et la protection hydrofuge sont répartis sur la durée de
+                  l'engagement. Vous réservez ici le premier passage ; les suivants sont calés avec vous d'un mois
+                  sur l'autre. L’acompte est déduit du premier mois.
+                </p>
+              </div>
             </div>
 
             <div class="bpanel" id="bk-etu" hidden>
-              <p class="bnote"><strong>Intérieur + extérieur à 70 €</strong>, ou <strong>60 € par voiture à partir de 3 voitures</strong>. Carte étudiante demandée sur place.</p>
-              <label class="bcount">Nombre de voitures
-                <select name="cars">
-                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-                </select>
-              </label>
+              <div class="babo">
+                <div class="babo__price">70 €<small> intérieur + extérieur</small></div>
+                <ul class="babo__list">
+                  <li>60 € par voiture à partir de 3 voitures</li>
+                  <li>1 h par voiture</li>
+                </ul>
+                <label class="bcount">Nombre de voitures
+                  <select name="cars">
+                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                  </select>
+                </label>
+                <p class="babo__terms">Carte étudiante demandée sur place.</p>
+              </div>
             </div>
           </form>
+
+          <!-- Modèle d'un véhicule. __i__ est remplacé par le numéro du véhicule.
+               Tarifs du flyer : data-price en euros, data-min en minutes. -->
+          <template id="bk-car-tpl">
+            <div class="bcar" data-car role="group">
+              <div class="bcar__head">
+                <p class="bcar__title">Véhicule <span data-car-num></span></p>
+                <div class="btype" role="radiogroup" aria-label="Type de véhicule">
+                  <label><input type="radio" name="type-__i__" value="voiture" checked><span>Voiture</span></label>
+                  <label><input type="radio" name="type-__i__" value="suv"><span>SUV <small>+ 25 €</small></span></label>
+                </div>
+                <button type="button" class="bcar__remove" data-car-remove aria-label="Retirer ce véhicule">Retirer</button>
+              </div>
+
+              <div class="bgroup">
+                <p class="bgroup__title">Intérieur</p>
+                <label class="brow"><input type="radio" name="int-__i__" value="" checked><span class="brow__name">Sans intérieur</span></label>
+                <label class="brow"><input type="radio" name="int-__i__" value="basic" data-label="Intérieur Basic Wash" data-price="70" data-min="90"><span class="brow__name">Basic Wash<small>Aspiration habitacle, tapis et sièges · plastiques et vitres intérieures</small></span><span class="brow__time">1 h – 1 h 30</span><span class="brow__price">70 €</span></label>
+                <label class="brow"><input type="radio" name="int-__i__" value="royal" data-label="Intérieur Royal Wash" data-price="90" data-min="180"><span class="brow__name">Royal Wash<small>Aspiration complète · vapeur · injecteur-extracteur · contours de portes et coffre · cuir et Alcantara · plastiques revitalisés</small></span><span class="brow__time">2 h – 3 h</span><span class="brow__price">90 €</span></label>
+              </div>
+
+              <div class="bgroup">
+                <p class="bgroup__title">Extérieur</p>
+                <label class="brow"><input type="radio" name="ext-__i__" value="" checked><span class="brow__name">Sans extérieur</span></label>
+                <label class="brow"><input type="radio" name="ext-__i__" value="royal" data-label="Extérieur Royal Wash" data-price="50" data-min="60"><span class="brow__name">Royal Wash<small>Décontaminant · canon à mousse et frottage main · haute pression · jantes · séchage main · vitres</small></span><span class="brow__time">1 h</span><span class="brow__price">50 €</span></label>
+              </div>
+
+              <div class="bgroup" data-needs-ext>
+                <p class="bgroup__title">Options <small>avec l'extérieur</small></p>
+                <label class="brow"><input type="checkbox" name="opt-__i__" value="hydrofuge" data-label="Protection hydrofuge" data-price="50" data-min="30"><span class="brow__name">Protection hydrofuge</span><span class="brow__price">+ 50 €</span></label>
+                <label class="brow"><input type="checkbox" name="opt-__i__" value="lustrage" data-label="Lustrage de la carrosserie" data-price="50" data-min="30"><span class="brow__name">Lustrage de la carrosserie</span><span class="brow__price">+ 50 €</span></label>
+              </div>
+            </div>
+          </template>
 
           <aside class="booker__summary" aria-live="polite">
             <h3>Votre lavage</h3>
