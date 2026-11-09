@@ -245,6 +245,64 @@
   });
 
   /* ----------------------------------------------------------------------
+     Réservation en ligne (Cal.com)
+     Le bloc #booking porte data-cal-link="votre-pseudo" (page de profil qui
+     liste toutes les formules) ou "votre-pseudo/une-formule". Tant qu'il est
+     vide, le message d'attente reste affiché et rien n'est chargé.
+     ---------------------------------------------------------------------- */
+  const booking = $("#booking");
+  const calLink = booking && (booking.dataset.calLink || "").trim();
+
+  if (booking && calLink) {
+    const origin = booking.dataset.calOrigin || "https://cal.com";
+    const embedSrc = origin.replace("://cal.com", "://app.cal.com") + "/embed/embed.js";
+
+    // Chargeur officiel Cal.com : met les appels en file le temps que le script arrive.
+    (function (C, A, L) {
+      const p = (a, ar) => { a.q.push(ar); };
+      const d = C.document;
+      C.Cal = C.Cal || function () {
+        const cal = C.Cal;
+        const ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, embedSrc, "init");
+
+    booking.innerHTML = "";
+    booking.classList.add("is-live");
+
+    window.Cal("init", { origin: origin });
+    window.Cal("inline", {
+      elementOrSelector: "#booking",
+      calLink: calLink,
+      layout: "month_view",
+    });
+    window.Cal("ui", {
+      theme: "dark",
+      styles: { branding: { brandColor: "#d4a24c" } },
+      hideEventTypeDetails: false,
+      layout: "month_view",
+    });
+  }
+
+  /* ----------------------------------------------------------------------
      Formulaire de contact
      ---------------------------------------------------------------------- */
   const form   = $("#contact-form");
@@ -278,7 +336,7 @@
       // Ouvre le client mail avec la demande pré-remplie. Pour un envoi sans
       // client mail, branchez ici Formspree, Web3Forms ou votre backend.
       window.location.href =
-        "mailto:contact@blvwash.fr" +
+        "mailto:oscar.bellavia2026@outlook.fr" +
         "?subject=" + encodeURIComponent(branch + " — " + data.get("service")) +
         "&body="    + encodeURIComponent(lignes.join("\n"));
 

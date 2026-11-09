@@ -1149,3 +1149,47 @@ h1, h2, h3, h4 {
 }
 .tariff__note span { font-size: 0.93rem; color: var(--text-muted); }
 .tariff__note b { color: var(--text); font-weight: 600; }
+
+/* ==========================================================================
+   Réservation en ligne (page Auto)
+   ========================================================================== */
+.booksteps {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 2rem;
+  margin-bottom: 1.8rem;
+}
+.booksteps li { display: flex; align-items: center; gap: 0.7rem; font-size: 0.93rem; color: var(--text-muted); }
+.booksteps span {
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.booking {
+  min-height: 22rem;
+  border: 1px solid var(--border);
+  background: var(--ink-850);
+  overflow: hidden;
+}
+.booking.is-live { min-height: 40rem; border-color: var(--border-soft); background: transparent; }
+.booking__fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 22rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+.booking__fallback p { color: var(--text-muted); max-width: 32rem; }
+.booking__fallback p:first-child { color: var(--text); font-size: 1.15rem; font-weight: 600; }
+.booking__fallback .btn { margin-top: 1rem; }
+.booking__terms { margin-top: 1.2rem; font-size: 0.82rem; color: var(--text-dim); max-width: 46rem; }

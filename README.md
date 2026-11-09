@@ -45,9 +45,10 @@ Les tarifs ne figurent que sur la page Auto : ils se règlent dans le bloc `.tar
 
 | Élément | Où le modifier |
 |---|---|
-| **Numéro de téléphone** | Les trois fichiers HTML : `+33776690722` (le lien) et `07 76 69 07 22` (l'affichage) |
+| **Numéro de téléphone** | `service.html` et le pied de page d'`index.html` : `+33776690722` (le lien) et `07 76 69 07 22` (l'affichage). La page Auto n'affiche plus de numéro : tout passe par la réservation en ligne |
+| **Réservation en ligne** | `auto.html`, attribut `data-cal-link` du bloc `#booking` (voir plus bas) |
 | **Logo** | Reconstruit en texte : `.logo__lockup` (BLV, le L en or serif, « Wash » dessous). Pour poser le vrai fichier, remplacez le contenu de `.logo__lockup` par `<img src="assets/img/logo.png" alt="BLV WASH">` |
-| Email `oscar.bellavia2026@outlook.fr` | Les trois fichiers HTML et `js/main.js` |
+| Email `oscar.bellavia2026@outlook.fr` | Les trois fichiers HTML et `js/main.js` (destinataire du formulaire) |
 | Secteur (57 / 54 / Luxembourg) | Section Contact et pied de page de chaque page |
 | Réseaux sociaux | Pied de page — Instagram et TikTok pointent sur `@blvwash` |
 | Couleurs | Variables CSS en tête de `css/style.css` (`:root`) |
@@ -89,6 +90,27 @@ Les photos sont désaturées et assombries par le CSS pour tenir ensemble malgr�
 Par défaut, le formulaire ouvre le client mail du visiteur avec la demande pré-remplie (`mailto:`). L'objet du message indique de quelle branche vient la demande, via l'attribut `data-branch` du formulaire.
 
 Pour un envoi direct sans client mail, branchez un service gratuit type [Web3Forms](https://web3forms.com) ou [Formspree](https://formspree.io) dans `js/main.js` — le point d'accroche est commenté.
+
+## Réservation en ligne avec acompte (page Auto)
+
+La section **Réservation** d'`auto.html` intègre un calendrier [Cal.com](https://cal.com) : le client choisit sa formule et son créneau, paie l'acompte par carte, et le rendez-vous arrive dans votre agenda (Google ou Outlook) avec une confirmation par email des deux côtés. Tant que rien n'est configuré, la section affiche un message d'attente qui renvoie vers le formulaire de contact.
+
+### Mise en place (une fois)
+
+1. **Créer le compte** sur [cal.com](https://cal.com) (offre gratuite suffisante), pseudo par exemple `blvwash`.
+2. **Relier l'agenda** : *Settings → Calendars* → Google Agenda ou Outlook. Les créneaux déjà pris disparaissent automatiquement, et chaque réservation y est inscrite.
+3. **Fixer les disponibilités** : *Availability* → jours et heures de travail.
+4. **Créer une formule par prestation** (*Event Types*) avec la bonne durée : Intérieur Basic (1 h 30), Intérieur Royal (3 h), Extérieur Royal (1 h), Intérieur + extérieur… Ajoutez un délai entre deux rendez-vous (*Limits → Buffer time*) pour le trajet, et dans *Advanced* une question obligatoire « Adresse du lavage » et « Modèle du véhicule ».
+5. **Brancher l'acompte** : *Apps → Stripe* → connecter (ou créer) un compte [Stripe](https://stripe.com). Puis, dans chaque formule, onglet *Apps → Stripe* : activez le paiement et mettez **20 €** (le montant de l'acompte, pas le prix total). Le rendez-vous n'est confirmé qu'une fois payé. L'argent arrive sur votre compte Stripe puis sur votre banque.
+6. **Activer sur le site** : dans `auto.html`, remplissez l'attribut du bloc :
+
+   ```html
+   <div class="booking reveal" id="booking" data-cal-link="blvwash" ...>
+   ```
+
+   `blvwash` affiche toutes les formules ; `blvwash/interieur-royal` ouvre directement une formule.
+
+Le montant de l'acompte et les conditions d'annulation affichés sur le site (20 €, gratuit jusqu'à 48 h avant) se modifient dans la section `#reservation` d'`auto.html` : gardez-les alignés avec Cal.com.
 
 ## Lancer le site en local
 
