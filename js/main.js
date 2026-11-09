@@ -245,6 +245,278 @@
   });
 
   /* ----------------------------------------------------------------------
+     Réservation en ligne
+     1. Le client compose son lavage, véhicule par véhicule : total, durée et
+        acompte se calculent à partir des data-price / data-min du modèle
+        #bk-car-tpl (auto.html). Abonnement et étudiant : fonction panier.
+     2. « Choisir mon créneau » ouvre le calendrier Cal.com, avec la durée
+        calculée et le récapitulatif recopié dans les notes du rendez-vous.
+        Tant que data-cal-link est vide, le récapitulatif est recopié dans le
+        formulaire de contact à la place.
+     ---------------------------------------------------------------------- */
+  const booker = $("#booker");
+
+  if (booker) {
+    const form     = $("#booker-form");
+    const deposit  = Number(booker.dataset.deposit || 20);
+    const panels   = { unit: $("#bk-unit"), abo: $("#bk-abo"), etu: $("#bk-etu") };
+    const carsBox  = $("#bk-cars");
+    const carTpl   = $("#bk-car-tpl");
+    const addCar   = $("#bk-addcar");
+    const goBtn    = $("#bk-go");
+    const slot     = $("#bk-slot");
+    const booking  = $("#booking");
+    const totalEl  = $("#bk-total");
+    const calLink  = (booking.dataset.calLink || "").trim();
+    const SUV      = 25;   // supplément SUV, appliqué avec l'intérieur (flyer)
+    const MAX_CARS = 5;
+    const euros    = (n) => n.toLocaleString("fr-FR") + " €";
+    const duree    = (min) => {
+      const h = Math.floor(min / 60), m = min % 60;
+      return h ? h + " h" + (m ? " " + String(m).padStart(2, "0") : "") : m + " min";
+    };
+
+    /* --- Véhicules ------------------------------------------------------ */
+    let carSeq = 0;
+    const cars = () => $$("[data-car]", carsBox);
+
+    const renumber = () => {
+      const list = cars();
+      list.forEach((car, i) => {
+        $("[data-car-num]", car).textContent = i + 1;
+        $("[data-car-remove]", car).hidden = list.length === 1;
+      });
+      addCar.hidden = list.length >= MAX_CARS;
+    };
+
+    const ajouterVehicule = () => {
+      const html = carTpl.innerHTML.replace(/__i__/g, String(carSeq++));
+      carsBox.insertAdjacentHTML("beforeend", html);
+      const car = carsBox.lastElementChild;
+      renumber();
+      return car;
+    };
+
+    addCar.addEventListener("click", () => {
+      const car = ajouterVehicule();
+      car.classList.add("is-new");
+      render();
+      car.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "nearest" });
+    });
+
+    carsBox.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-car-remove]");
+      if (!btn) return;
+      btn.closest("[data-car]").remove();
+      renumber();
+      render();
+    });
+
+    ajouterVehicule();
+
+    /* --- Calcul ---------------------------------------------------------- */
+    // Renvoie le panier : des groupes (un par véhicule) de lignes [libellé, prix].
+    const panier = () => {
+      const mode = form.elements.mode.value;
+      if (mode === "abo") {
+        return {
+          mode,
+          groupes: [{ titre: "", lignes: [["Abonnement, premier mois (Basic intérieur + Royal extérieur)", 90]] }],
+          total: 90,
+          minutes: 150,
+          suite: "puis 90 € / mois, engagement six mois",
+        };
+      }
+      if (mode === "etu") {
+        const n = Number(form.elements.cars.value);
+        const prix = n >= 3 ? 60 : 70;
+        return {
+          mode,
+          groupes: [{ titre: "", lignes: [["Étudiant intérieur + extérieur × " + n + " (" + prix + " € / voiture)", prix * n]] }],
+          total: prix * n,
+          minutes: 60 * n,
+        };
+      }
+
+      const groupes = [];
+      let total = 0, minutes = 0;
+      const list = cars();
+      list.forEach((car, i) => {
+        const choisis = $$("input[data-price]:checked", car);
+        if (!choisis.length) return;
+        const lignes = choisis.map((inp) => [inp.dataset.label, Number(inp.dataset.price)]);
+        const suv = $("input[name^='type-']:checked", car).value === "suv";
+        const avecInt = choisis.some((inp) => inp.name.startsWith("int-"));
+        if (suv && avecInt) lignes.push(["Supplément SUV", SUV]);
+        lignes.forEach(([, prix]) => { total += prix; });
+        minutes += choisis.reduce((t, inp) => t + Number(inp.dataset.min), 0);
+        groupes.push({ titre: list.length > 1 ? "Véhicule " + (i + 1) + (suv ? " · SUV" : "") : "", lignes });
+      });
+      return { mode, groupes, total, minutes };
+    };
+
+    const recap = (p) =>
+      p.groupes.map((g) =>
+        (g.titre ? g.titre + "\n" : "") +
+        g.lignes.map(([l, prix]) => "- " + l + " : " + euros(prix)).join("\n")
+      ).join("\n") +
+      "\nTotal : " + euros(p.total) + (p.suite ? " (" + p.suite + ")" : "") +
+      "\nDurée estimée : " + duree(p.minutes) +
+      "\nAcompte : " + euros(deposit) + ", reste sur place : " + euros(Math.max(p.total - deposit, 0));
+
+    /* --- Affichage ------------------------------------------------------- */
+    let dernierTotal = 0;
+
+    const render = () => {
+      const mode = form.elements.mode.value;
+      Object.keys(panels).forEach((k) => { panels[k].hidden = k !== mode; });
+
+      // Les options carrosserie vont avec l'extérieur du même véhicule.
+      cars().forEach((car) => {
+        const ok = $("input[name^='ext-']:checked", car).value !== "";
+        const grp = $("[data-needs-ext]", car);
+        grp.classList.toggle("is-off", !ok);
+        $$("input", grp).forEach((inp) => {
+          inp.disabled = !ok;
+          if (!ok) inp.checked = false;
+        });
+      });
+
+      const p = panier();
+      const vide = p.groupes.length === 0;
+      $("#bk-lines").innerHTML = vide
+        ? '<li class="bsum__empty">Choisissez au moins une prestation.</li>'
+        : p.groupes.map((g) =>
+            (g.titre ? '<li class="bsum__car">' + g.titre + "</li>" : "") +
+            g.lignes.map(([l, prix]) => "<li><span>" + l + "</span><span>" + euros(prix) + "</span></li>").join("")
+          ).join("") +
+          (p.suite ? '<li class="bsum__suite"><span>' + p.suite + "</span></li>" : "");
+      totalEl.textContent          = euros(p.total);
+      $("#bk-time").textContent    = vide ? "—" : duree(p.minutes);
+      $("#bk-deposit").textContent = euros(deposit);
+      $("#bk-rest").textContent    = vide ? "—" : euros(Math.max(p.total - deposit, 0));
+      goBtn.disabled = vide;
+
+      // Le total « saute » quand il change.
+      if (p.total !== dernierTotal && !reducedMotion) {
+        totalEl.classList.remove("is-bump");
+        void totalEl.offsetWidth;
+        totalEl.classList.add("is-bump");
+      }
+      dernierTotal = p.total;
+
+      // Choix modifié après coup : on referme le calendrier pour ne pas
+      // réserver un créneau d'une durée qui ne correspond plus.
+      if (!slot.hidden && calLink) slot.hidden = true;
+    };
+
+    form.addEventListener("change", (e) => {
+      // Petit effet sur la ligne qu'on vient de cocher.
+      const row = e.target.closest(".brow, .btype label, .bmode label");
+      if (row && e.target.checked && !reducedMotion) {
+        row.classList.remove("is-pop");
+        void row.offsetWidth;
+        row.classList.add("is-pop");
+      }
+      render();
+    });
+
+    // Onde dorée qui part du point cliqué.
+    if (!reducedMotion) {
+      form.addEventListener("pointerdown", (e) => {
+        const row = e.target.closest(".brow, .baddcar");
+        if (!row || row.classList.contains("is-off")) return;
+        const r = row.getBoundingClientRect();
+        const wave = document.createElement("span");
+        wave.className = "bwave";
+        wave.style.left = e.clientX - r.left + "px";
+        wave.style.top  = e.clientY - r.top + "px";
+        row.appendChild(wave);
+        wave.addEventListener("animationend", () => wave.remove());
+      });
+    }
+
+    render();
+
+    /* --- Calendrier ------------------------------------------------------ */
+    // Chargeur officiel Cal.com (appels mis en file le temps que le script arrive).
+    const chargerCal = (origin) => {
+      if (window.Cal) return;
+      (function (C, A, L) {
+        const p = (a, ar) => { a.q.push(ar); };
+        const d = C.document;
+        C.Cal = C.Cal || function () {
+          const cal = C.Cal;
+          const ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, origin.replace("://cal.com", "://app.cal.com") + "/embed/embed.js", "init");
+    };
+
+    let ouverture = 0;
+    goBtn.addEventListener("click", () => {
+      const p = panier();
+      if (!p.groupes.length) return;
+      slot.hidden = false;
+
+      if (calLink) {
+        const origin = booking.dataset.calOrigin || "https://cal.com";
+        chargerCal(origin);
+        // Un espace de noms neuf à chaque ouverture : le calendrier repart
+        // proprement avec la nouvelle durée et le nouveau récapitulatif.
+        const ns = "bk" + ++ouverture;
+        booking.innerHTML = "";
+        booking.classList.add("is-live");
+        window.Cal("init", ns, { origin: origin });
+        window.Cal.ns[ns]("inline", {
+          elementOrSelector: "#booking",
+          calLink: calLink,
+          layout: "month_view",
+          config: { duration: String(p.minutes), notes: recap(p) },
+        });
+        window.Cal.ns[ns]("ui", {
+          theme: "dark",
+          styles: { branding: { brandColor: "#d4a24c" } },
+          layout: "month_view",
+        });
+      } else {
+        // Pas encore de calendrier : on prépare la demande dans le formulaire.
+        const msg = $("#f-msg");
+        const srv = $("#f-service");
+        if (msg) msg.value = "Ma sélection :\n" + recap(p) + "\n\nAdresse du lavage : \nModèle(s) du véhicule : \nMes disponibilités : ";
+        if (srv) {
+          const plusieurs = p.mode === "unit" && cars().length > 1;
+          srv.value = { abo: "Abonnement", etu: "Tarif étudiant" }[p.mode] ||
+            (plusieurs ? "Flotte / plusieurs véhicules" : "Lavage à l'unité");
+        }
+      }
+      slot.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    });
+
+    $("#bk-back").addEventListener("click", () => {
+      slot.hidden = true;
+      booker.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    });
+  }
+
+  /* ----------------------------------------------------------------------
      Formulaire de contact
      ---------------------------------------------------------------------- */
   const form   = $("#contact-form");
@@ -278,7 +550,7 @@
       // Ouvre le client mail avec la demande pré-remplie. Pour un envoi sans
       // client mail, branchez ici Formspree, Web3Forms ou votre backend.
       window.location.href =
-        "mailto:contact@blvwash.fr" +
+        "mailto:oscar.bellavia2026@outlook.fr" +
         "?subject=" + encodeURIComponent(branch + " — " + data.get("service")) +
         "&body="    + encodeURIComponent(lignes.join("\n"));
 

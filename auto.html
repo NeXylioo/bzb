@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="dark">
   <title>BLV Wash Auto — Detailing automobile à domicile</title>
-  <meta name="description" content="BLV Wash Auto lave et rénove votre véhicule à la main, devant chez vous. Intérieur dès 65 €, extérieur dès 40 €, abonnement 85 € / mois. Moselle, Meurthe-et-Moselle et Luxembourg.">
+  <meta name="description" content="BLV Wash Auto lave et rénove votre véhicule à la main, devant chez vous. Intérieur dès 70 €, extérieur dès 50 €, abonnement 90 € / mois, tarif étudiant. Moselle, Meurthe-et-Moselle et Luxembourg.">
   <meta property="og:title" content="BLV Wash Auto — Detailing automobile à domicile">
   <meta property="og:description" content="Le detailing qui se déplace. Nous intervenons chez vous, sur votre place de parking.">
   <meta property="og:type" content="website">
@@ -33,17 +33,16 @@
       </a>
 
       <nav class="nav" id="nav" aria-label="Navigation principale">
-        <a href="#prestations" class="nav__link" data-num="01">Prestations</a>
-        <a href="#protocole"   class="nav__link" data-num="02">Protocole</a>
-        <a href="#galerie"     class="nav__link" data-num="03">Réalisations</a>
-        <a href="#contact"     class="nav__link" data-num="04">Contact</a>
-        <a href="service.html" class="nav__link" data-num="05">BLV Wash Service</a>
+        <a href="#reservation" class="nav__link" data-num="01">Réserver</a>
+        <a href="#galerie"     class="nav__link" data-num="02">Réalisations</a>
+        <a href="#contact"     class="nav__link" data-num="03">Contact</a>
+        <a href="service.html" class="nav__link" data-num="04">BLV Wash Service</a>
       </nav>
 
       <div class="header__actions">
-        <a href="tel:+33776690722" class="header__phone">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
-          <span>07 76 69 07 22</span>
+        <a href="#reservation" class="header__phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+          <span>Réserver</span>
         </a>
         <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
           <span></span><span></span><span></span>
@@ -68,9 +67,9 @@
             et nous repartons une fois votre véhicule irréprochable.
           </p>
           <div class="hero__actions reveal delay-3">
-            <a href="tel:+33776690722" class="btn btn--primary">Appeler maintenant</a>
-            <a href="#prestations" class="btn btn--outline">
-              Voir les prestations
+            <a href="#reservation" class="btn btn--primary">Réserver un créneau</a>
+            <a href="#galerie" class="btn btn--outline">
+              Nos réalisations
               <span class="btn__arrow" aria-hidden="true">→</span>
             </a>
           </div>
@@ -83,179 +82,132 @@
       </div>
     </section>
 
-    <!-- ===== Intention ===== -->
-    <section class="section">
-      <div class="container">
-        <div class="pillars">
-          <article class="pillar reveal">
-            <span class="pillar__num">01</span>
-            <h3>Chez vous, toujours</h3>
-            <p>Domicile, bureau, parking. Nous sommes autonomes en eau et en électricité : vous n'avez rien à prévoir.</p>
-          </article>
-          <article class="pillar reveal delay-1">
-            <span class="pillar__num">02</span>
-            <h3>À la main, sans exception</h3>
-            <p>Méthode des deux seaux, microfibres dédiées par zone, séchage sans contact. Aucun rouleau n'approche votre carrosserie.</p>
-          </article>
-          <article class="pillar reveal delay-2">
-            <span class="pillar__num">03</span>
-            <h3>Produits professionnels</h3>
-            <p>Un produit adapté à chaque matériau : vernis, cuir, alcantara, jante, plastique. Rien d'agressif, rien d'universel.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Prestations ===== -->
-    <section class="section section--alt" id="prestations">
+    <!-- ===== Réservation en ligne =====
+         1. Le client compose son lavage : le prix et la durée se calculent en direct.
+            Les tarifs et durées se règlent dans les data-price / data-min ci-dessous.
+         2. Il choisit son créneau dans le calendrier Cal.com et paie l'acompte (Stripe).
+         Pour activer le calendrier : renseignez data-cal-link (README, « Réservation en ligne »). -->
+    <section class="section" id="reservation">
       <div class="container">
         <div class="section__head reveal">
-          <span class="label">Prestations</span>
-          <h2>Nos formules, prix affichés.</h2>
-          <p>Pas de devis à rallonge : les tarifs sont les mêmes pour tout le monde. Seuls les très gros véhicules et les états extrêmes se discutent au téléphone.</p>
+          <span class="label">Réservation</span>
+          <h2>Composez votre lavage, choisissez votre créneau.</h2>
+          <p>Le prix se calcule selon vos choix. Un acompte de 20 € bloque le rendez-vous, le reste se règle sur place une fois le travail terminé.</p>
         </div>
 
-        <div class="tariffs">
-          <article class="tariff reveal">
-            <div class="tariff__media">
-              <img src="assets/img/fx-int-basic.jpg" alt="Habitacle d'une berline après aspiration complète" loading="lazy">
+        <div class="booker reveal" id="booker" data-deposit="20">
+          <form class="booker__choices" id="booker-form" novalidate>
+            <div class="bmode" role="radiogroup" aria-label="Type de prestation">
+              <label><input type="radio" name="mode" value="unit" checked><span>À l'unité</span></label>
+              <label><input type="radio" name="mode" value="abo"><span>Abonnement</span></label>
+              <label><input type="radio" name="mode" value="etu"><span>Étudiant</span></label>
             </div>
-            <div class="tariff__body">
-              <div class="tariff__head">
-                <h3 class="tariff__name">Intérieur — Basic Wash</h3>
-                <span class="tariff__price">65<small> €</small></span>
-              </div>
-              <span class="tariff__time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>1 h à 1 h 30</span>
-              <ul class="tariff__list">
-                <li>Aspiration de l'habitacle, des tapis et des sièges</li>
-                <li>Dépoussiérage et nettoyage des plastiques</li>
-                <li>Vitres intérieures</li>
-              </ul>
-              <a href="#contact" class="card__link">Réserver ce forfait <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></a>
-            </div>
-          </article>
 
-          <article class="tariff reveal tariff--feature">
-            <span class="tariff__flag">Le plus complet</span>
-            <div class="tariff__media">
-              <img src="assets/img/fx-int-royal.jpg" alt="Intérieur cuir d'une voiture de sport rénové" loading="lazy">
+            <!-- À l'unité : un bloc par véhicule, cloné depuis le modèle plus bas. -->
+            <div class="bpanel" id="bk-unit">
+              <div class="bcars" id="bk-cars"></div>
+              <button type="button" class="baddcar" id="bk-addcar">
+                <span aria-hidden="true">+</span> Ajouter un véhicule
+              </button>
             </div>
-            <div class="tariff__body">
-              <div class="tariff__head">
-                <h3 class="tariff__name">Intérieur — Royal Wash</h3>
-                <span class="tariff__price">95<small> €</small></span>
-              </div>
-              <span class="tariff__time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 h à 3 h</span>
-              <ul class="tariff__list">
-                <li>Nettoyage vapeur de la moquette</li>
-                <li>Injecteur-extracteur sur tout l'habitacle : moquette, tapis, sièges</li>
-                <li>Contours de portes et coffre</li>
-                <li>Rénovation professionnelle du cuir et de l'Alcantara</li>
-              </ul>
-              <a href="#contact" class="card__link">Réserver ce forfait <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></a>
-            </div>
-          </article>
 
-          <article class="tariff reveal">
-            <div class="tariff__media">
-              <img src="assets/img/fx-ext.jpg" alt="Carrosserie et jante lavées au canon à mousse" loading="lazy">
-            </div>
-            <div class="tariff__body">
-              <div class="tariff__head">
-                <h3 class="tariff__name">Extérieur — Royal Wash</h3>
-                <span class="tariff__price">40<small> €</small></span>
+            <div class="bpanel" id="bk-abo" hidden>
+              <div class="babo">
+                <div class="babo__price">90 €<small> / mois</small></div>
+                <ul class="babo__list">
+                  <li>1 nettoyage Basic intérieur et Royal extérieur chaque mois</li>
+                  <li>3 lustrages extérieurs</li>
+                  <li>1 protection hydrofuge</li>
+                </ul>
+                <p class="babo__terms">
+                  Engagement sur six mois. Les lustrages et la protection hydrofuge sont répartis sur la durée de
+                  l'engagement. Vous réservez ici le premier passage ; les suivants sont calés avec vous d'un mois
+                  sur l'autre. L’acompte est déduit du premier mois.
+                </p>
               </div>
-              <span class="tariff__time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>1 h</span>
-              <ul class="tariff__list">
-                <li>Décontaminant appliqué puis rinçage de la carrosserie</li>
-                <li>Canon à mousse et frottage à la main</li>
-                <li>Rinçage au nettoyeur haute pression</li>
-                <li>Chaque jante nettoyée en détail</li>
-                <li>Séchage complet à la main</li>
-                <li>Vitres extérieures</li>
-              </ul>
-              <a href="#contact" class="card__link">Réserver ce forfait <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></a>
             </div>
-          </article>
 
-          <article class="tariff reveal">
-            <div class="tariff__media">
-              <img src="assets/img/fx-abo.jpg" alt="Berline de luxe entretenue chaque mois" loading="lazy">
-            </div>
-            <div class="tariff__body">
-              <div class="tariff__head">
-                <h3 class="tariff__name">Abonnement</h3>
-                <span class="tariff__price">85<small> € / mois</small></span>
+            <div class="bpanel" id="bk-etu" hidden>
+              <div class="babo">
+                <div class="babo__price">70 €<small> intérieur + extérieur</small></div>
+                <ul class="babo__list">
+                  <li>60 € par voiture à partir de 3 voitures</li>
+                  <li>1 h par voiture</li>
+                </ul>
+                <label class="bcount">Nombre de voitures
+                  <select name="cars">
+                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                  </select>
+                </label>
+                <p class="babo__terms">Carte étudiante demandée sur place.</p>
               </div>
-              <span class="tariff__time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Engagement six mois</span>
-              <ul class="tariff__list">
-                <li>Un nettoyage Basic intérieur et Royal extérieur chaque mois</li>
-                <li>Premier nettoyage Royal intérieur et extérieur à 100 €</li>
-                <li>Créneau réservé d'un mois sur l'autre</li>
-              </ul>
-              <a href="#contact" class="card__link">Réserver ce forfait <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></a>
             </div>
-          </article>
+          </form>
+
+          <!-- Modèle d'un véhicule. __i__ est remplacé par le numéro du véhicule.
+               Tarifs du flyer : data-price en euros, data-min en minutes. -->
+          <template id="bk-car-tpl">
+            <div class="bcar" data-car role="group">
+              <div class="bcar__head">
+                <p class="bcar__title">Véhicule <span data-car-num></span></p>
+                <div class="btype" role="radiogroup" aria-label="Type de véhicule">
+                  <label><input type="radio" name="type-__i__" value="voiture" checked><span>Voiture</span></label>
+                  <label><input type="radio" name="type-__i__" value="suv"><span>SUV <small>+ 25 €</small></span></label>
+                </div>
+                <button type="button" class="bcar__remove" data-car-remove aria-label="Retirer ce véhicule">Retirer</button>
+              </div>
+
+              <div class="bgroup">
+                <p class="bgroup__title">Intérieur</p>
+                <label class="brow"><input type="radio" name="int-__i__" value="" checked><span class="brow__name">Sans intérieur</span></label>
+                <label class="brow"><input type="radio" name="int-__i__" value="basic" data-label="Intérieur Basic Wash" data-price="70" data-min="90"><span class="brow__name">Basic Wash<small>Aspiration habitacle, tapis et sièges · plastiques et vitres intérieures</small></span><span class="brow__time">1 h – 1 h 30</span><span class="brow__price">70 €</span></label>
+                <label class="brow"><input type="radio" name="int-__i__" value="royal" data-label="Intérieur Royal Wash" data-price="90" data-min="180"><span class="brow__name">Royal Wash<small>Aspiration complète · vapeur · injecteur-extracteur · contours de portes et coffre · cuir et Alcantara · plastiques revitalisés</small></span><span class="brow__time">2 h – 3 h</span><span class="brow__price">90 €</span></label>
+              </div>
+
+              <div class="bgroup">
+                <p class="bgroup__title">Extérieur</p>
+                <label class="brow"><input type="radio" name="ext-__i__" value="" checked><span class="brow__name">Sans extérieur</span></label>
+                <label class="brow"><input type="radio" name="ext-__i__" value="royal" data-label="Extérieur Royal Wash" data-price="50" data-min="60"><span class="brow__name">Royal Wash<small>Décontaminant · canon à mousse et frottage main · haute pression · jantes · séchage main · vitres</small></span><span class="brow__time">1 h</span><span class="brow__price">50 €</span></label>
+              </div>
+
+              <div class="bgroup" data-needs-ext>
+                <p class="bgroup__title">Options <small>avec l'extérieur</small></p>
+                <label class="brow"><input type="checkbox" name="opt-__i__" value="hydrofuge" data-label="Protection hydrofuge" data-price="50" data-min="30"><span class="brow__name">Protection hydrofuge</span><span class="brow__price">+ 50 €</span></label>
+                <label class="brow"><input type="checkbox" name="opt-__i__" value="lustrage" data-label="Lustrage de la carrosserie" data-price="50" data-min="30"><span class="brow__name">Lustrage de la carrosserie</span><span class="brow__price">+ 50 €</span></label>
+              </div>
+            </div>
+          </template>
+
+          <aside class="booker__summary" aria-live="polite">
+            <h3>Votre lavage</h3>
+            <ul class="bsum__lines" id="bk-lines"><li class="bsum__empty">Choisissez au moins une prestation.</li></ul>
+            <div class="bsum__row bsum__total"><span>Total</span><strong id="bk-total">0 €</strong></div>
+            <div class="bsum__row"><span>Durée estimée</span><span id="bk-time">—</span></div>
+            <div class="bsum__row bsum__deposit"><span>Acompte à la réservation</span><strong id="bk-deposit">20 €</strong></div>
+            <div class="bsum__row"><span>Reste à régler sur place</span><span id="bk-rest">—</span></div>
+            <button type="button" class="btn btn--primary btn--block" id="bk-go" disabled>Choisir mon créneau</button>
+            <p class="bsum__note">État extrême ? Précisez-le à la réservation, le prix peut être ajusté.</p>
+          </aside>
         </div>
 
-        <p class="tariff__note reveal">
-          <strong>Options</strong>
-          <span>Lustrage de la carrosserie <b>+ 20 €</b></span>
-          <span>Protection hydrofuge <b>+ 70 €</b></span>
+        <div class="bslot" id="bk-slot" hidden>
+          <div class="bslot__head">
+            <h3>Votre créneau</h3>
+            <button type="button" class="bslot__back" id="bk-back">← Modifier mes choix</button>
+          </div>
+          <div class="booking" id="booking" data-cal-link="" data-cal-origin="https://cal.com">
+            <div class="booking__fallback">
+              <p>La réservation en ligne arrive très bientôt.</p>
+              <p>En attendant, envoyez-nous votre demande : votre sélection est déjà recopiée dans le formulaire, il ne reste qu'à indiquer vos disponibilités.</p>
+              <a href="#contact" class="btn btn--primary" id="bk-to-contact">Compléter ma demande</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="booking__terms reveal">
+          L'acompte est déduit du prix final. Annulation ou report gratuit jusqu'à 48 h avant le rendez-vous ;
+          en deçà, l'acompte reste acquis.
         </p>
-      </div>
-    </section>
-
-    <!-- ===== Protocole ===== -->
-    <section class="section" id="protocole">
-      <div class="container">
-        <div class="section__head reveal">
-          <span class="label">Protocole</span>
-          <h2>Le même geste, dans le même ordre, à chaque fois.</h2>
-          <p>Un protocole fixe, c'est ce qui fait qu'un résultat se reproduit.</p>
-        </div>
-
-        <div class="drag reveal" data-drag>
-          <div class="drag__viewport">
-            <div class="drag__track">
-              <article class="stepcard">
-                <span class="stepcard__num">01</span>
-                <h3>On se cale</h3>
-                <p>Un appel, quelques questions sur le véhicule et son état. Vous avez le prix et un créneau avant qu'on raccroche.</p>
-              </article>
-              <article class="stepcard">
-                <span class="stepcard__num">02</span>
-                <h3>On arrive</h3>
-                <p>Cuve d'eau, groupe électrogène, nettoyeur. Nous nous installons sur votre place sans rien vous demander.</p>
-              </article>
-              <article class="stepcard">
-                <span class="stepcard__num">03</span>
-                <h3>Prélavage</h3>
-                <p>Mousse active, temps de pose, rinçage haute pression. Le gros de la saleté part sans qu'aucun gant ne touche le vernis.</p>
-              </article>
-              <article class="stepcard">
-                <span class="stepcard__num">04</span>
-                <h3>Lavage main</h3>
-                <p>Deux seaux, un gant par zone, du haut vers le bas. Jantes et passages de roues traités à part, avec leurs propres outils.</p>
-              </article>
-              <article class="stepcard">
-                <span class="stepcard__num">05</span>
-                <h3>Intérieur</h3>
-                <p>Aspiration, shampouinage, cuir nourri, vitres sans trace. Les aérations et les rails de siège aussi.</p>
-              </article>
-              <article class="stepcard">
-                <span class="stepcard__num">06</span>
-                <h3>Contrôle ensemble</h3>
-                <p>On fait le tour du véhicule avec vous. Si quelque chose ne va pas, on le reprend sur place.</p>
-              </article>
-            </div>
-          </div>
-          <div class="drag__hint">
-            <span aria-hidden="true">←</span>
-            <span>Faites glisser</span>
-            <span class="drag__bar" aria-hidden="true"><span></span></span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -310,22 +262,6 @@
       </div>
     </section>
 
-    <!-- ===== Appel ===== -->
-    <section class="cta">
-      <div class="cta__media" aria-hidden="true">
-        <img src="assets/img/cta.jpg" alt="" loading="lazy">
-      </div>
-      <div class="container cta__inner reveal">
-        <span class="label label--plain label--accent">Prêt à franchir le pas ?</span>
-        <h2>Votre véhicule mérite mieux qu'un portique.</h2>
-        <p>Un appel suffit pour avoir le prix et un créneau.</p>
-        <div class="cta__actions">
-          <a href="tel:+33776690722" class="btn btn--light">07 76 69 07 22</a>
-          <a href="#contact" class="btn btn--outline">Écrire un message</a>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== Contact ===== -->
     <section class="section section--alt" id="contact">
       <div class="container">
@@ -336,10 +272,6 @@
 
         <div class="contact">
           <div class="contact__list reveal-left">
-            <div class="contact__item">
-              <span class="contact__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg></span>
-              <div><strong>Téléphone</strong><a href="tel:+33776690722">07 76 69 07 22</a></div>
-            </div>
             <div class="contact__item">
               <span class="contact__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6.5L21 6"/></svg></span>
               <div><strong>Email</strong><a href="mailto:oscar.bellavia2026@outlook.fr">oscar.bellavia2026@outlook.fr</a></div>
@@ -358,7 +290,7 @@
               </div>
               <div class="form__group">
                 <label for="f-phone">Téléphone *</label>
-                <input type="tel" id="f-phone" name="phone" required autocomplete="tel" placeholder="07 76 69 07 22">
+                <input type="tel" id="f-phone" name="phone" required autocomplete="tel" placeholder="06 12 34 56 78">
               </div>
             </div>
             <div class="form__row">
@@ -370,12 +302,11 @@
                 <label for="f-service">Prestation *</label>
                 <select id="f-service" name="service" required>
                   <option value="" disabled selected>Choisir…</option>
-                  <option>Intérieur — Basic Wash (65 €)</option>
-                  <option>Intérieur — Royal Wash (95 €)</option>
-                  <option>Extérieur — Royal Wash (40 €)</option>
-                  <option>Intérieur + extérieur</option>
-                  <option>Abonnement (85 € / mois)</option>
+                  <option>Lavage à l'unité</option>
+                  <option>Abonnement</option>
+                  <option>Tarif étudiant</option>
                   <option>Flotte / plusieurs véhicules</option>
+                  <option>Question</option>
                   <option>Autre</option>
                 </select>
               </div>
@@ -411,13 +342,12 @@
       </div>
       <div class="footer__col">
         <h4>BLV Wash Auto</h4>
-        <a href="#prestations">Prestations</a>
-        <a href="#protocole">Protocole</a>
+        <a href="#reservation">Réservation</a>
         <a href="#galerie">Réalisations</a>
       </div>
       <div class="footer__col">
         <h4>Contact</h4>
-        <a href="tel:+33776690722">07 76 69 07 22</a>
+        <a href="#reservation">Réserver en ligne</a>
         <a href="mailto:oscar.bellavia2026@outlook.fr">oscar.bellavia2026@outlook.fr</a>
         <a href="service.html">BLV Wash Service</a>
       </div>
