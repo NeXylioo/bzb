@@ -258,9 +258,7 @@
   if (booker) {
     const form     = $("#booker-form");
     const deposit  = Number(booker.dataset.deposit || 20);
-    const unitBox  = $("#bk-unit");
-    const aboBox   = $("#bk-abo");
-    const extras   = $("#bk-extras");
+    const panels   = { unit: $("#bk-unit"), abo: $("#bk-abo"), etu: $("#bk-etu") };
     const goBtn    = $("#bk-go");
     const slot     = $("#bk-slot");
     const booking  = $("#booking");
@@ -271,19 +269,30 @@
       return h ? h + " h" + (m ? " " + String(m).padStart(2, "0") : "") : m + " min";
     };
 
-    // Lit les choix et renvoie le panier.
+    // Lit les choix et renvoie le panier. Tarifs du flyer.
     const panier = () => {
       const mode = form.elements.mode.value;
       if (mode === "abo") {
+        // Premier passage : Basic intérieur + Royal extérieur (1 h 30 + 1 h).
         return {
           mode,
-          lignes: [["Abonnement — premier passage Royal intérieur + extérieur", 100]],
-          total: 100,
-          minutes: 240,
-          suite: "puis 85 € / mois, engagement six mois",
+          lignes: [["Abonnement, premier mois (Basic intérieur + Royal extérieur)", 90]],
+          total: 90,
+          minutes: 150,
+          suite: "puis 90 € / mois, engagement six mois",
         };
       }
-      const choisis = $$("input[data-price]:checked", unitBox);
+      if (mode === "etu") {
+        const n = Number(form.elements.cars.value);
+        const prix = n >= 3 ? 60 : 70;
+        return {
+          mode,
+          lignes: [["Étudiant intérieur + extérieur × " + n + " (" + prix + " € / voiture)", prix * n]],
+          total: prix * n,
+          minutes: 150 * n,
+        };
+      }
+      const choisis = $$("input[data-price]:checked", panels.unit);
       return {
         mode,
         lignes: choisis.map((i) => [i.dataset.label, Number(i.dataset.price)]),
@@ -300,16 +309,15 @@
 
     const render = () => {
       const mode = form.elements.mode.value;
-      unitBox.hidden = mode === "abo";
-      aboBox.hidden  = mode !== "abo";
+      Object.keys(panels).forEach((k) => { panels[k].hidden = k !== mode; });
 
-      // Les options carrosserie n'ont de sens qu'avec l'extérieur.
-      const avecExt = form.elements.ext.value !== "";
-      extras.classList.toggle("is-off", !avecExt);
-      $("#bk-extras-hint").hidden = avecExt;
-      $$("input", extras).forEach((i) => {
-        i.disabled = !avecExt;
-        if (!avecExt) i.checked = false;
+      // Hydrofuge et lustrage vont avec l'extérieur, le supplément SUV avec l'intérieur.
+      $$("[data-needs]", panels.unit).forEach((row) => {
+        const ok = form.elements[row.dataset.needs].value !== "";
+        const input = $("input", row);
+        row.classList.toggle("is-off", !ok);
+        input.disabled = !ok;
+        if (!ok) input.checked = false;
       });
 
       const p = panier();
@@ -394,7 +402,7 @@
         const msg = $("#f-msg");
         const srv = $("#f-service");
         if (msg) msg.value = "Ma sélection :\n" + recap(p) + "\n\nAdresse du lavage : \nModèle du véhicule : \nMes disponibilités : ";
-        if (srv) srv.value = p.mode === "abo" ? "Abonnement" : "Lavage à l'unité";
+        if (srv) srv.value = { abo: "Abonnement", etu: "Tarif étudiant" }[p.mode] || "Lavage à l'unité";
       }
       slot.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
     });

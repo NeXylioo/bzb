@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="dark">
   <title>BLV Wash Auto — Detailing automobile à domicile</title>
-  <meta name="description" content="BLV Wash Auto lave et rénove votre véhicule à la main, devant chez vous. Intérieur dès 65 €, extérieur dès 40 €, abonnement 85 € / mois. Moselle, Meurthe-et-Moselle et Luxembourg.">
+  <meta name="description" content="BLV Wash Auto lave et rénove votre véhicule à la main, devant chez vous. Intérieur dès 70 €, extérieur dès 50 €, abonnement 90 € / mois, tarif étudiant. Moselle, Meurthe-et-Moselle et Luxembourg.">
   <meta property="og:title" content="BLV Wash Auto — Detailing automobile à domicile">
   <meta property="og:description" content="Le detailing qui se déplace. Nous intervenons chez vous, sur votre place de parking.">
   <meta property="og:type" content="website">
@@ -98,96 +98,45 @@
         <div class="booker reveal" id="booker" data-deposit="20">
           <form class="booker__choices" id="booker-form" novalidate>
             <div class="bmode" role="radiogroup" aria-label="Type de prestation">
-              <label><input type="radio" name="mode" value="unit" checked><span>Lavage à l'unité</span></label>
-              <label><input type="radio" name="mode" value="abo"><span>Abonnement mensuel</span></label>
+              <label><input type="radio" name="mode" value="unit" checked><span>À l'unité</span></label>
+              <label><input type="radio" name="mode" value="abo"><span>Abonnement</span></label>
+              <label><input type="radio" name="mode" value="etu"><span>Étudiant</span></label>
             </div>
 
-            <div class="bunit" id="bk-unit">
+            <!-- À l'unité : tarifs du flyer. data-price en euros, data-min en minutes. -->
+            <div class="bpanel" id="bk-unit">
               <fieldset class="bgroup">
-                <legend><span>1</span>Intérieur</legend>
-                <div class="bopts">
-              <label class="bopt bopt--none">
-                <input type="radio" name="int" value="" checked>
-                <span class="bopt__card"><span class="bopt__body"><strong>Sans intérieur</strong></span></span>
-              </label>
-              <label class="bopt">
-                <input type="radio" name="int" value="basic" data-label="Intérieur — Basic Wash" data-price="65" data-min="90">
-                <span class="bopt__card">
-                  <span class="bopt__media"><img src="assets/img/fx-int-basic.jpg" alt="Habitacle d'une berline après aspiration" loading="lazy"></span>
-                  <span class="bopt__body">
-                    <span class="bopt__head"><strong>Basic Wash</strong><span class="bopt__price">65 €</span></span>
-                    <span class="bopt__time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>1 h à 1 h 30</span>
-                    <ul class="bopt__list"><li>Aspiration de l'habitacle, des tapis et des sièges</li><li>Dépoussiérage et nettoyage des plastiques</li><li>Vitres intérieures</li></ul>
-                  </span>
-                </span>
-              </label>
-              <label class="bopt">
-                <input type="radio" name="int" value="royal" data-label="Intérieur — Royal Wash" data-price="95" data-min="180">
-                <span class="bopt__card">
-                  <span class="bopt__media"><img src="assets/img/fx-int-royal.jpg" alt="Intérieur cuir rénové" loading="lazy"></span>
-                  <span class="bopt__body">
-                    <span class="bopt__head"><strong>Royal Wash</strong><span class="bopt__price">95 €</span></span>
-                    <span class="bopt__time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 h à 3 h</span>
-                    <ul class="bopt__list"><li>Nettoyage vapeur de la moquette</li><li>Injecteur-extracteur : moquette, tapis, sièges</li><li>Contours de portes et coffre</li><li>Rénovation du cuir et de l'Alcantara</li></ul>
-                  </span>
-                </span>
-              </label>
-                </div>
+                <legend>Intérieur</legend>
+                <label class="brow"><input type="radio" name="int" value="" checked><span class="brow__name">Sans intérieur</span></label>
+                <label class="brow"><input type="radio" name="int" value="basic" data-label="Intérieur Basic Wash" data-price="70" data-min="90"><span class="brow__name">Basic Wash<small>Aspiration habitacle, tapis et sièges · plastiques et vitres intérieures</small></span><span class="brow__time">1 h – 1 h 30</span><span class="brow__price">70 €</span></label>
+                <label class="brow"><input type="radio" name="int" value="royal" data-label="Intérieur Royal Wash" data-price="90" data-min="180"><span class="brow__name">Royal Wash<small>Aspiration complète · vapeur · injecteur-extracteur · contours de portes et coffre · cuir et Alcantara · plastiques revitalisés</small></span><span class="brow__time">2 h – 3 h</span><span class="brow__price">90 €</span></label>
               </fieldset>
 
               <fieldset class="bgroup">
-                <legend><span>2</span>Extérieur</legend>
-                <div class="bopts">
-              <label class="bopt bopt--none">
-                <input type="radio" name="ext" value="" checked>
-                <span class="bopt__card"><span class="bopt__body"><strong>Sans extérieur</strong></span></span>
-              </label>
-              <label class="bopt">
-                <input type="radio" name="ext" value="royal" data-label="Extérieur — Royal Wash" data-price="40" data-min="60">
-                <span class="bopt__card">
-                  <span class="bopt__media"><img src="assets/img/fx-ext.jpg" alt="Carrosserie lavée au canon à mousse" loading="lazy"></span>
-                  <span class="bopt__body">
-                    <span class="bopt__head"><strong>Royal Wash</strong><span class="bopt__price">40 €</span></span>
-                    <span class="bopt__time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>1 h</span>
-                    <ul class="bopt__list"><li>Décontaminant puis rinçage</li><li>Canon à mousse et frottage à la main</li><li>Jantes nettoyées en détail</li><li>Séchage à la main, vitres extérieures</li></ul>
-                  </span>
-                </span>
-              </label>
-                </div>
+                <legend>Extérieur</legend>
+                <label class="brow"><input type="radio" name="ext" value="" checked><span class="brow__name">Sans extérieur</span></label>
+                <label class="brow"><input type="radio" name="ext" value="royal" data-label="Extérieur Royal Wash" data-price="50" data-min="60"><span class="brow__name">Royal Wash<small>Décontaminant · canon à mousse et frottage main · haute pression · jantes · séchage main · vitres</small></span><span class="brow__time">1 h</span><span class="brow__price">50 €</span></label>
               </fieldset>
 
-              <fieldset class="bgroup" id="bk-extras">
-                <legend><span>3</span>Options carrosserie</legend>
-                <p class="bgroup__hint" id="bk-extras-hint">Disponibles avec l'Extérieur Royal Wash.</p>
-                <div class="bextras">
-              <label class="bextra">
-                <input type="checkbox" name="opt" value="lustrage" data-label="Lustrage de la carrosserie" data-price="20" data-min="30">
-                <span><strong>Lustrage de la carrosserie</strong><small>Brillance ravivée, micro-rayures atténuées</small></span>
-                <b>+ 20 €</b>
-              </label>
-              <label class="bextra">
-                <input type="checkbox" name="opt" value="hydrofuge" data-label="Protection hydrofuge" data-price="70" data-min="30">
-                <span><strong>Protection hydrofuge</strong><small>L'eau perle, la saleté accroche moins pendant des mois</small></span>
-                <b>+ 70 €</b>
-              </label>
-                </div>
+              <fieldset class="bgroup">
+                <legend>Options</legend>
+                <label class="brow" data-needs="ext"><input type="checkbox" name="opt" value="hydrofuge" data-label="Protection hydrofuge" data-price="50" data-min="30"><span class="brow__name">Protection hydrofuge<small>Avec l'extérieur</small></span><span class="brow__price">+ 50 €</span></label>
+                <label class="brow" data-needs="ext"><input type="checkbox" name="opt" value="lustrage" data-label="Lustrage de la carrosserie" data-price="50" data-min="30"><span class="brow__name">Lustrage de la carrosserie<small>Avec l'extérieur</small></span><span class="brow__price">+ 50 €</span></label>
+                <label class="brow" data-needs="int"><input type="checkbox" name="opt" value="suv" data-label="Supplément SUV" data-price="25" data-min="0"><span class="brow__name">Mon véhicule est un SUV<small>Avec l'intérieur</small></span><span class="brow__price">+ 25 €</span></label>
               </fieldset>
             </div>
 
-            <div class="babo" id="bk-abo" hidden>
-              <div class="babo__card">
-                <img src="assets/img/fx-abo.jpg" alt="Berline de luxe entretenue chaque mois" loading="lazy">
-                <div>
-                  <h3>Abonnement — 85 € / mois</h3>
-                  <ul class="bopt__list">
-                    <li>Chaque mois : Basic intérieur et Royal extérieur</li>
-                    <li>Premier passage : Royal intérieur et extérieur à 100 €</li>
-                    <li>Créneau réservé d'un mois sur l'autre</li>
-                    <li>Engagement six mois</li>
-                  </ul>
-                  <p class="bgroup__hint">Vous réservez ici le premier passage.</p>
-                </div>
-              </div>
+            <div class="bpanel" id="bk-abo" hidden>
+              <p class="bnote"><strong>90 € / mois</strong>, engagement six mois. Chaque mois : un Basic intérieur et un Royal extérieur. Sur les six mois : 3 lustrages extérieurs et 1 protection hydrofuge. Vous réservez ici le premier passage.</p>
+            </div>
+
+            <div class="bpanel" id="bk-etu" hidden>
+              <p class="bnote"><strong>Intérieur + extérieur à 70 €</strong>, ou <strong>60 € par voiture à partir de 3 voitures</strong>. Carte étudiante demandée sur place.</p>
+              <label class="bcount">Nombre de voitures
+                <select name="cars">
+                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                </select>
+              </label>
             </div>
           </form>
 
@@ -199,13 +148,13 @@
             <div class="bsum__row bsum__deposit"><span>Acompte à la réservation</span><strong id="bk-deposit">20 €</strong></div>
             <div class="bsum__row"><span>Reste à régler sur place</span><span id="bk-rest">—</span></div>
             <button type="button" class="btn btn--primary btn--block" id="bk-go" disabled>Choisir mon créneau</button>
-            <p class="bsum__note">Très gros véhicule ou état extrême ? Précisez-le à la réservation, le prix peut être ajusté.</p>
+            <p class="bsum__note">État extrême ? Précisez-le à la réservation, le prix peut être ajusté.</p>
           </aside>
         </div>
 
         <div class="bslot" id="bk-slot" hidden>
           <div class="bslot__head">
-            <h3><span>4</span>Votre créneau</h3>
+            <h3>Votre créneau</h3>
             <button type="button" class="bslot__back" id="bk-back">← Modifier mes choix</button>
           </div>
           <div class="booking" id="booking" data-cal-link="" data-cal-origin="https://cal.com">
@@ -317,6 +266,7 @@
                   <option value="" disabled selected>Choisir…</option>
                   <option>Lavage à l'unité</option>
                   <option>Abonnement</option>
+                  <option>Tarif étudiant</option>
                   <option>Flotte / plusieurs véhicules</option>
                   <option>Question</option>
                   <option>Autre</option>
