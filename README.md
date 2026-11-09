@@ -45,7 +45,7 @@ Les tarifs ne figurent que sur la page Auto : ils se règlent dans le bloc `.tar
 
 | Élément | Où le modifier |
 |---|---|
-| **Numéro de téléphone** | `service.html` et le pied de page d'`index.html` : `+33776690722` (le lien) et `07 76 69 07 22` (l'affichage). La page Auto n'affiche plus de numéro : tout passe par la réservation en ligne |
+| **Numéro de téléphone** | `service.html` uniquement : `+33776690722` (le lien) et `07 76 69 07 22` (l'affichage). La page Auto n'affiche plus de numéro : tout passe par la réservation en ligne |
 | **Réservation en ligne** | `auto.html`, attribut `data-cal-link` du bloc `#booking` (voir plus bas) |
 | **Logo** | Reconstruit en texte : `.logo__lockup` (BLV, le L en or serif, « Wash » dessous). Pour poser le vrai fichier, remplacez le contenu de `.logo__lockup` par `<img src="assets/img/logo.png" alt="BLV WASH">` |
 | Email `oscar.bellavia2026@outlook.fr` | Les trois fichiers HTML et `js/main.js` (destinataire du formulaire) |
